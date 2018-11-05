@@ -7,6 +7,30 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "vendors/iconfonts/mdi/css/materialdesignicons.min.css" %>
+    <%= stylesheet_link_tag "vendors/css/vendor.bundle.base.css" %>
+    <%= stylesheet_link_tag "vendors/css/vendor.bundle.addons.css" %>
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <%= stylesheet_link_tag "css/style.css" %>
+    <!-- endinject -->
+    <link rel="shortcut icon" href="images/favicon.png"/>
+
+    <!-- plugins:js -->
+    <%= javascript_tag src="vendors/js/vendor.bundle.base.js" %>
+    <%= javascript_tag src="vendors/js/vendor.bundle.addons.js" %>
+    <!-- endinject -->
+    <!-- Plugin js for this page-->
+    <!-- End plugin js for this page-->
+    <!-- inject:js -->
+    <%= javascript_tag src="js/off-canvas.js" %>
+    <%= javascript_tag src="js/misc.js" %>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <%= javascript_tag src="js/dashboard.js" %>
+    <!-- End custom js for this page-->
   </head>
 
   <body>
