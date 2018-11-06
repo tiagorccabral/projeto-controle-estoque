@@ -1,39 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>ProjetoControleEstoque</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Adolescentro - Controle de Estoque</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag "vendors/iconfonts/mdi/css/materialdesignicons.min.css" %>
-    <%= stylesheet_link_tag "vendors/css/vendor.bundle.base.css" %>
-    <%= stylesheet_link_tag "vendors/css/vendor.bundle.addons.css" %>
-    <!-- endinject -->
-    <!-- plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <%= stylesheet_link_tag "css/style.css" %>
-    <!-- endinject -->
-    <link rel="shortcut icon" href="images/favicon.png"/>
+  <%= stylesheet_link_tag "vendors/iconfonts/mdi/css/materialdesignicons.min.css" %>
+  <%= stylesheet_link_tag "vendors/css/vendor.bundle.base.css" %>
+  <%= stylesheet_link_tag "vendors/css/vendor.bundle.addons.css" %>
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <%= stylesheet_link_tag "css/style.css" %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <!-- endinject -->
+  <link rel="shortcut icon" href="images/favicon.png"/>
+</head>
 
-    <!-- plugins:js -->
-    <%= javascript_tag src="vendors/js/vendor.bundle.base.js" %>
-    <%= javascript_tag src="vendors/js/vendor.bundle.addons.js" %>
-    <!-- endinject -->
-    <!-- Plugin js for this page-->
-    <!-- End plugin js for this page-->
-    <!-- inject:js -->
-    <%= javascript_tag src="js/off-canvas.js" %>
-    <%= javascript_tag src="js/misc.js" %>
-    <!-- endinject -->
-    <!-- Custom js for this page-->
-    <%= javascript_tag src="js/dashboard.js" %>
-    <!-- End custom js for this page-->
-  </head>
+<body>
 
-  <body>
-    <%= yield %>
-  </body>
+<% if user_signed_in? == true %>
+  <div class="container-scroller">
+    <%= render 'backoffice/shared/navbar' %>
+    <div class="container-fluid page-body-wrapper">
+      <%= render 'backoffice/shared/sidebar' %>
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <%= yield %>
+<% end %>
+
+<!-- plugins:js -->
+<%= javascript_include_tag src="vendors/js/vendor.bundle.base.js" %>
+<%= javascript_include_tag src="vendors/js/vendor.bundle.addons.js" %>
+<!-- endinject -->
+<!-- Plugin js for this page-->
+<!-- End plugin js for this page-->
+<!-- inject:js -->
+<%= javascript_include_tag src="js/off-canvas.js" %>
+<%= javascript_include_tag src="js/misc.js" %>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<%= javascript_include_tag src="js/dashboard.js" %>
+<!-- End custom js for this page-->
+</body>
+
+
 </html>
