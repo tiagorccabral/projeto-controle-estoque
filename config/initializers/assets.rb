@@ -16,4 +16,8 @@ Rails.application.config.assets.precompile += %w( vendors/iconfonts/mdi/css/mate
 Rails.application.config.assets.precompile += %w( vendors/css/vendor.bundle.base.css )
 Rails.application.config.assets.precompile += %w( vendors/css/vendor.bundle.addons.css )
 Rails.application.config.assets.precompile += %w( css/style.css )
-
+Rails.application.config.assets.precompile += %w( vendors/js/vendor.bundle.base.js )
+Rails.application.config.assets.precompile += %w( vendors/js/vendor.bundle.addons.js )
+Rails.application.config.assets.precompile += %w( js/off-canvas.js )
+Rails.application.config.assets.precompile += %w( js/misc.js )
+Rails.application.config.assets.precompile += %w( js/dashboard.js )
