@@ -19,7 +19,7 @@
 </head>
 
 <body>
-
+<%= render :partial => 'flash_messages', :flash => flash %>
 <% if user_signed_in? == true %>
   <div class="container-scroller">
     <%= render 'backoffice/shared/navbar' %>
