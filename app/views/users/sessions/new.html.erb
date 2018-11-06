@@ -1,0 +1,71 @@
+<div class="container-scroller">
+  <div class="container-fluid page-body-wrapper full-page-wrapper auth-page">
+    <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
+      <div class="row w-100">
+        <div class="col-lg-4 mx-auto">
+          <div class="auto-form-wrapper">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="form-group">
+                <label class="label">E-mail</label>
+                <div class="input-group">
+                  <%= f.email_field :email,
+                                    class: "form-control",
+                                    autofocus: true,
+                                    placeholder: "Endereço de e-mail",
+                                    autocomplete: "email" %>
+                  <div class="input-group-append">
+                      <span class="input-group-text">
+                        <i class="mdi mdi-check-circle-outline"></i>
+                      </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="label">Senha</label>
+                <div class="input-group">
+                  <%= f.password_field :password,
+                                       class: "form-control",
+                                       placeholder: "*********",
+                                       autocomplete: "current-password" %>
+                  <div class="input-group-append">
+                      <span class="input-group-text">
+                        <i class="mdi mdi-check-circle-outline"></i>
+                      </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                  <%= f.submit "Log in", class: "btn btn-primary submit-btn btn-block" %>
+              </div>
+              <div class="form-group d-flex justify-content-between">
+                <% if devise_mapping.rememberable? -%>
+                <div class="form-check form-check-flat mt-0">
+                  <label class="form-check-label">
+                    <%= f.check_box :remember_me, class: "form-check-input" %>
+                    Me mantenha conectado(a)
+                  </label>
+                </div>
+                <% end -%>
+                <a href="#" class="text-small forgot-password text-black">Esqueceu a senha?</a>
+              </div>
+            <% end %>
+          </div>
+          <ul class="auth-footer">
+            <li>
+              <a href="#">Condições</a>
+            </li>
+            <li>
+              <a href="#">Ajuda</a>
+            </li>
+            <li>
+              <a href="#">Termos</a>
+            </li>
+          </ul>
+          <p class="footer-text text-center">Adolescentro 2018. Todos os direitos reservados.</p>
+        </div>
+      </div>
+    </div>
+    <!-- content-wrapper ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
+</div>
