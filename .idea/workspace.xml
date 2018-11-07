@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="011ba5c2-90cc-4888-a6f5-4dbfc746f5dc" name="Default" comment="" />
+    <list default="true" id="011ba5c2-90cc-4888-a6f5-4dbfc746f5dc" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/vendor/assets/star-admin2/vendors/iconfonts/font-awesome/css/font-awesome.scss" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/assets/star-admin2/vendors/iconfonts/font-awesome/css/font-awesome.scss" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,11 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            <state>
+              <caret column="39" lean-forward="true" selection-start-column="39" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -61,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="font-awesome.scss" pinned="false" current-in-tab="false">
+      <file leaf-file-name="font-awesome.scss" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vendor/assets/star-admin2/vendors/iconfonts/font-awesome/css/font-awesome.scss">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="243">
-              <caret line="9" column="314" selection-start-line="9" selection-start-column="314" selection-end-line="9" selection-end-column="314" />
+              <caret line="9" column="153" lean-forward="true" selection-start-line="9" selection-start-column="153" selection-end-line="9" selection-end-column="153" />
             </state>
           </provider>
         </entry>
@@ -81,6 +83,7 @@
       <find>login_2</find>
       <find>login_1</find>
       <find>.woff</find>
+      <find>url</find>
     </findStrings>
     <replaceStrings>
       <replace>&lt;%= javascript_tag $1 %&gt;</replace>
@@ -290,6 +293,17 @@
               <item name="css" type="462c0819:PsiDirectoryNode" />
               <item name="font-awesome.scss" type="620a8d5e:NestingTreeNode" />
             </path>
+            <path>
+              <item name="projeto-controle-estoque" type="b2602c69:ProjectViewProjectNode" />
+              <item name="projeto-controle-estoque" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="star-admin2" type="462c0819:PsiDirectoryNode" />
+              <item name="vendors" type="462c0819:PsiDirectoryNode" />
+              <item name="iconfonts" type="462c0819:PsiDirectoryNode" />
+              <item name="font-awesome" type="462c0819:PsiDirectoryNode" />
+              <item name="fonts" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -440,7 +454,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19526000" />
+    <option name="totallyTimeSpent" value="19791000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-11" width="1922" height="1092" extended-state="6" />
@@ -819,17 +833,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/assets/star-admin2/vendors/iconfonts/font-awesome/css/font-awesome.scss">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="9" column="314" selection-start-line="9" selection-start-column="314" selection-end-line="9" selection-end-column="314" />
+        <state>
+          <caret column="39" lean-forward="true" selection-start-column="39" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/vendor/assets/star-admin2/vendors/iconfonts/font-awesome/css/font-awesome.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="243">
+          <caret line="9" column="153" lean-forward="true" selection-start-line="9" selection-start-column="153" selection-end-line="9" selection-end-column="153" />
         </state>
       </provider>
     </entry>
