@@ -9,6 +9,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <%= favicon_link_tag "images/favicon.png" %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
   <%= stylesheet_link_tag "vendors/iconfonts/mdi/css/materialdesignicons.min.css" %>
   <%= stylesheet_link_tag "vendors/css/vendor.bundle.base.css" %>
   <%= stylesheet_link_tag "vendors/css/vendor.bundle.addons.css" %>
@@ -17,12 +20,13 @@
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <%= stylesheet_link_tag "css/style.css" %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <!-- endinject -->
+
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
 <body>
-<%= render :partial => 'flash_messages', :flash => flash %>
+<%= custom_flash %>
 <% if user_signed_in? == true %>
   <div class="container-scroller">
     <%= render 'backoffice/shared/navbar' %>
