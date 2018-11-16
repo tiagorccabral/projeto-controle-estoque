@@ -21,3 +21,4 @@ Rails.application.config.assets.precompile += %w( vendors/js/vendor.bundle.addon
 Rails.application.config.assets.precompile += %w( js/off-canvas.js )
 Rails.application.config.assets.precompile += %w( js/misc.js )
 Rails.application.config.assets.precompile += %w( js/dashboard.js )
+Rails.application.config.assets.precompile += %w( images/favicon.png )
