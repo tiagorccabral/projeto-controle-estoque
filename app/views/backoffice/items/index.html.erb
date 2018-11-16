@@ -1,0 +1,62 @@
+<div class="row purchace-popup">
+  <div class="col-12">
+    <span class="d-block d-md-flex align-items-center">
+      <%= link_to "/backoffice/items/new", class: "btn btn-success btn-lg btn-fw" do %>
+        <i class="mdi mdi-plus-circle" style="color: white"></i>
+        <span class="menu-title">Nova doação</span>
+      <% end %>
+      <%= link_to "/backoffice/items_list", class: "btn btn-primary btn-lg btn-fw" do %>
+              <i class="mdi mdi-view-list" style="color: white"></i>
+              <span class="menu-title">Listagem de doações</span>
+            <% end %>
+      <i class="mdi mdi-close ml-auto popup-dismiss d-none d-md-block"></i>
+    </span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+    <div class="card card-statistics">
+      <div class="card-body">
+        <div class="clearfix">
+          <div class="float-left">
+            <i class="mdi mdi-file-document-box text-danger icon-lg"></i>
+          </div>
+          <div class="float-right">
+            <p class="mb-0 text-right">Total de doações</p>
+            <div class="fluid-container">
+              <h3 class="font-weight-medium text-right mb-0"><%= @total_amount %> itens</h3>
+            </div>
+          </div>
+        </div>
+        <p class="text-muted mt-3 mb-0">
+          <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> Ultima doação feita em:
+          <% if @items.last %>
+            <%= @items.last.created_at %>
+          <% else %>
+            Nenhuma doação realizada.
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+    <div class="card card-statistics">
+      <div class="card-body">
+        <div class="clearfix">
+          <div class="float-left">
+            <i class="mdi mdi-receipt text-warning icon-lg"></i>
+          </div>
+          <div class="float-right">
+            <p class="mb-0 text-right">Valor total das doações</p>
+            <div class="fluid-container">
+              <h3 class="font-weight-medium text-right mb-0">R$ <%= @total_value %></h3>
+            </div>
+          </div>
+        </div>
+        <p class="text-muted mt-3 mb-0">
+          <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i> Considerando apenas os com valor declarado
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
