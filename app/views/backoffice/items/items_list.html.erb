@@ -1,0 +1,101 @@
+<div class="row purchace-popup">
+  <div class="col-12">
+    <span class="d-block d-md-flex align-items-center">
+      <%= link_to "/backoffice/items/new", class: "btn btn-success btn-lg btn-fw" do %>
+        <i class="mdi mdi-plus-circle" style="color: white"></i>
+        <span class="menu-title">Nova doação</span>
+      <% end %>
+      <%= link_to "/backoffice/items", class: "btn btn-primary btn-lg btn-fw" do %>
+              <i class="mdi mdi-view-list" style="color: white"></i>
+              <span class="menu-title">Painel inicial</span>
+            <% end %>
+      <i class="mdi mdi-close ml-auto popup-dismiss d-none d-md-block"></i>
+    </span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Listagem completa de doações</h4>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>
+            Nome do produto
+          </th>
+          <th>
+            Valor
+          </th>
+          <th>
+            Quantidade
+          </th>
+          <th>
+            Nome do doador
+          </th>
+          <th>
+            Nome do recebedor
+          </th>
+          <th>
+            Nome do funcionário interno
+          </th>
+          <th>
+            Data de recebimento
+          </th>
+          <th>
+            Informações
+          </th>
+          <th>
+            Editar
+          </th>
+          <th>
+            Excluir
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @items.each do |item| %>
+          <tr>
+            <td class="py-1">
+              <%= item.name %>
+            </td>
+            <td>
+              R$:&nbsp;<%= item.value %>
+            </td>
+            <td>
+              <%= item.amount %>
+            </td>
+            <td>
+              <%= item.donor %>
+            </td>
+            <td>
+              <%= item.receiver %>
+            </td>
+            <td>
+              <%= item.internal %>
+            </td>
+            <td>
+              <%= item.created_at %>
+            </td>
+            <td>
+              <%= link_to "/backoffice/items/#{item.id}", class: "text-info" do %>
+                <i class="fa fa-reply fa-fw"></i>Informações</a>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to "/backoffice/items/#{item.id}/edit", class: "text-primary" do %>
+                <i class="fa fa-reply fa-fw"></i>Editar</a>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to "/backoffice/items/#{item.id}", method: "delete", data: {confirm: "Tem certeza?"}, class: "text-danger" do %>
+                <i class="fa fa-reply fa-fw"></i>Excluir</a>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
