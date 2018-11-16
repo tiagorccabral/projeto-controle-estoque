@@ -1,0 +1,102 @@
+<div class="row purchace-popup">
+  <div class="col-12">
+    <span class="d-block d-md-flex align-items-center">
+      <%= link_to "/backoffice/items/new", class: "btn btn-success btn-lg btn-fw" do %>
+        <i class="mdi mdi-plus-circle" style="color: white"></i>
+        <span class="menu-title">Nova doação</span>
+      <% end %>
+      <%= link_to "/backoffice/items_list", class: "btn btn-primary btn-lg btn-fw" do %>
+              <i class="mdi mdi-view-list" style="color: white"></i>
+              <span class="menu-title">Listagem de doações</span>
+            <% end %>
+      <i class="mdi mdi-close ml-auto popup-dismiss d-none d-md-block"></i>
+    </span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h2 ><%= @item.name %></h2>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>
+            Nome do produto
+          </th>
+          <th>
+            Valor
+          </th>
+          <th>
+            Quantidade
+          </th>
+          <th>
+            Nome do doador
+          </th>
+          <th>
+            Nome do recebedor
+          </th>
+          <th>
+            Nome do funcionário interno
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="py-1">
+            <%= @item.name %>
+          </td>
+          <td>
+            R$:&nbsp;<%= @item.value %>
+          </td>
+          <td>
+            <%= @item.amount %>
+          </td>
+          <td>
+            <%= @item.donor %>
+          </td>
+          <td>
+            <%= @item.receiver %>
+          </td>
+          <td>
+            <%= @item.internal %>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+      <div class="card card-statistics">
+        <div class="card-body">
+          <div class="clearfix">
+            <div class="float-left">
+              <p class="mb-0">Estado de uso:</p>
+              <div class="fluid-container">
+                <h3 class="font-weight-medium mb-0">
+                  <% if @item.used == true %>
+                    Item usado
+                  <% else %>
+                    Item novo
+                  <% end %>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <div class="form-group">
+        <%= link_to 'Editar', "/backoffice/items/#{@item.id}/edit", class: 'btn btn-primary rounded' %>
+        <%= link_to 'Voltar', backoffice_items_path, class: 'btn btn-primary rounded' %>
+      </div>
+    </div>
+  </div>
+
+</div>

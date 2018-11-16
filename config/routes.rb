@@ -7,6 +7,12 @@ Rails.application.routes.draw do
       registrations: 'users/registrations'
   }, :skip => [:registrations]
 
-  get '/admin', to: 'backoffice/dashboard#index'
+
+  namespace :backoffice do
+    get '/admin', to: 'dashboard#index'
+    resources :users
+    resources :items
+    get '/items_list', to: 'items#items_list'
+  end
 
 end
