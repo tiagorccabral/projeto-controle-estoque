@@ -22,7 +22,7 @@ gem "rack", ">= 2.0.6"
 gem 'devise'
 
 # gema do bootstrap 4
-gem 'bootstrap', '~> 4.1.3'
+gem 'bootstrap', '~> 4.0.0'
 
 # gema do jquery-rails
 gem 'jquery-rails'
