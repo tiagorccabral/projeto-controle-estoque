@@ -8,7 +8,7 @@ class CreateItemsTable < ActiveRecord::Migration[5.2]
       t.float :value
       t.string :donor, default: "Anônimo"
       t.string :receiver
-      t.string :internal
+      t.boolean :internal, default: false
       t.datetime :entry_date
       t.datetime :departure_date
       t.boolean :used, default: false

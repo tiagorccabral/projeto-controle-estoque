@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2018_11_16_153011) do
     t.float "value"
     t.string "donor"
     t.string "receiver"
-    t.string "internal"
+    t.boolean "internal", default: false
     t.datetime "entry_date"
     t.datetime "departure_date"
     t.boolean "used", default: false

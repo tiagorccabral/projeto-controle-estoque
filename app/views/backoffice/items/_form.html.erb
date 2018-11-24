@@ -89,9 +89,10 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nome do funcionário interno</label>
+            <label class="col-sm-3 col-form-label">Doador interno?</label>
             <div class="col-sm-9">
-              <%= f.text_field(:internal, class: "form-control", placeholder: @item.internal, required:false) %>
+              <%= f.select :used, options_for_select([['Não', false], ['Sim', true]], :selected => f.object.used),
+                      {}, class: "form-control", required: true %>
             </div>
           </div>
         </div>
