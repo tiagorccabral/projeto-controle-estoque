@@ -74,7 +74,7 @@
               <%= item.internal %>
             </td>
             <td>
-              <%= item.created_at %>
+              <%= item.created_at.strftime("%d/%m/%Y") %>
             </td>
             <td>
               <%= link_to "/backoffice/items/#{item.id}", class: "text-info" do %>

@@ -16,3 +16,4 @@
 //= require turbolinks
 //= require popper
 //= require toastr/toastr.min.js
+//= require Chart.bundle.min.js

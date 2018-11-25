@@ -10,6 +10,26 @@ class Backoffice::TimeChartsController < ApplicationController
     @time_charts = TimeChart.all.order('created_at DESC')
   end
 
+  # GET / compare_chart
+  def chart_new
+    @time_chart = TimeChart.new
+  end
+
+  # POST / compare_chart
+  def chart_create
+    @charts = []
+    if params['time_chart_ids'] != nil
+      params['time_chart_ids'].each do |time_chart_id|
+        @charts << TimeChart.find(time_chart_id)
+      end
+      @charts.sort! { |a, b|  a.report_date <=> b.report_date}
+    else
+      respond_to do |format|
+        format.html { redirect_to backoffice_time_charts_path, notice: 'Selecione algum relatório para geral um gráfico.' }
+      end
+    end
+  end
+
   # GET /time_charts/1
   # GET /time_charts/1.json
   def show; end
@@ -95,6 +115,10 @@ class Backoffice::TimeChartsController < ApplicationController
       amount += item.amount
     end
     amount
+  end
+
+  def create_chart_session(charts_ids)
+    session[:charts] = charts_ids
   end
 
   # Use callbacks to share common setup or constraints between actions.
