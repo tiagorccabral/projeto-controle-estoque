@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_16_153011) do
+ActiveRecord::Schema.define(version: 2018_11_25_143030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,13 +19,22 @@ ActiveRecord::Schema.define(version: 2018_11_16_153011) do
     t.string "name"
     t.integer "amount"
     t.float "value"
-    t.string "donor"
+    t.string "donor", default: "Anônimo"
     t.string "receiver"
     t.boolean "internal", default: false
     t.datetime "entry_date"
     t.datetime "departure_date"
     t.boolean "used", default: false
     t.boolean "lost", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "time_charts", force: :cascade do |t|
+    t.string "name"
+    t.integer "amount_donated"
+    t.float "value_donated"
+    t.datetime "report_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

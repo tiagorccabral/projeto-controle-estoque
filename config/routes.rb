@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     get '/admin', to: 'dashboard#index'
     resources :users
     resources :items
+    resources :time_charts
+    get 'time_charts/compare_chart', to: 'time_charts#chart_new'
+    post 'time_charts/compare_chart', to: 'time_charts#chart_create'
     get '/items_list', to: 'items#items_list'
   end
 
