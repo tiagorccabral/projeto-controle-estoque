@@ -1,0 +1,67 @@
+<h1>Relatórios de doações</h1>
+
+<div class="row purchace-popup">
+  <div class="col-12">
+    <span class="d-block d-md-flex align-items-center">
+      <%= link_to "/backoffice/time_charts/new", class: "btn btn-success btn-lg btn-fw" do %>
+        <i class="mdi mdi-plus-circle" style="color: white"></i>
+        <span class="menu-title">Gerar relatório</span>
+      <% end %>
+    </span>
+  </div>
+</div>
+
+<% if @time_charts.length == 0 %>
+
+  <div class="card">
+    <h3>Você ainda não criou nenhum relatório.</h3>
+    <h4>
+      <%= link_to "Criar novo relatório", new_backoffice_time_chart_path	%>
+
+    </h4>
+  </div>
+
+<% else %>
+
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Listagem de relatórios</h4>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>
+              Nome do relatório
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @time_charts.each do |time_chart| %>
+            <tr>
+              <td class="py-1">
+                <%= time_chart.name %>
+              </td>
+              <td>
+                <%= link_to "/backoffice/time_charts/#{time_chart.id}", class: "text-info" do %>
+                  <i class="fa fa-reply fa-fw"></i>Informações</a>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to "/backoffice/time_charts/#{time_chart.id}/edit", class: "text-primary" do %>
+                  <i class="fa fa-reply fa-fw"></i>Editar</a>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to "/backoffice/time_charts/#{time_chart.id}", method: "delete", data: {confirm: "Tem certeza?"}, class: "text-danger" do %>
+                  <i class="fa fa-reply fa-fw"></i>Excluir</a>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+<% end %>

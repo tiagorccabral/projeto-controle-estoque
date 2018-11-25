@@ -1,0 +1,61 @@
+<div class="row purchace-popup">
+  <div class="col-12">
+    <span class="d-block d-md-flex align-items-center">
+      <%= link_to "/backoffice/time_charts/new", class: "btn btn-success btn-lg btn-fw" do %>
+        <i class="mdi mdi-plus-circle" style="color: white"></i>
+        <span class="menu-title">Gerar relatório</span>
+      <% end %>
+    </span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h2><%= @time_chart.name %></h2>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>
+            Nome do relatório
+          </th>
+          <th>
+            Valor total
+          </th>
+          <th>
+            Quantidade total
+          </th>
+          <th>
+            Dados relativos ao dia
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="py-1">
+            <%= @time_chart.name %>
+          </td>
+          <td class="py-1">
+            <%= number_to_currency(@time_chart.value_donated, :unit => "R$ ", :separator => ",", :delimiter => ".") %>
+          </td>
+          <td class="py-1">
+            <%= @time_chart.amount_donated %> itens
+          </td>
+          <td class="py-1">
+            <%= @time_chart.report_date.strftime("%d/%m/%Y") %>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="form-group">
+        <%= link_to 'Editar', "/backoffice/time_charts/#{@time_chart.id}/edit", class: 'btn btn-primary rounded' %>
+        <%= link_to 'Voltar', backoffice_time_charts_path, class: 'btn btn-primary rounded' %>
+      </div>
+    </div>
+  </div>
+
+</div>

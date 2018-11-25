@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get '/admin', to: 'dashboard#index'
     resources :users
     resources :items
+    resources :time_charts
     get '/items_list', to: 'items#items_list'
   end
 

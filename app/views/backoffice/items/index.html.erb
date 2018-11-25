@@ -1,3 +1,4 @@
+<h1>Informações de Doações</h1>
 <div class="row purchace-popup">
   <div class="col-12">
     <span class="d-block d-md-flex align-items-center">
@@ -49,7 +50,7 @@
           <div class="float-right">
             <p class="mb-0 text-right">Valor total das doações</p>
             <div class="fluid-container">
-              <h3 class="font-weight-medium text-right mb-0">R$ <%= @total_value %></h3>
+              <h3 class="font-weight-medium text-right mb-0"><%= number_to_currency(@total_value, :unit => "R$ ", :separator => ",", :delimiter => ".") %></h3>
             </div>
           </div>
         </div>
