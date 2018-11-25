@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :users
     resources :items
     get '/items_list', to: 'items#items_list'
+    put '/sell_item', to: 'items#sell'
   end
 
 end
