@@ -30,6 +30,9 @@
             Quantidade
           </th>
           <th>
+            Vender uma unidade
+          </th>
+          <th>
             Nome do doador
           </th>
           <th>
@@ -63,6 +66,9 @@
             </td>
             <td>
               <%= item.amount %>
+            </td>
+            <td>
+              <%= link_to '-', backoffice_sell_item_path(id: item.id), class: 'btn btn-md btn-info', method: :put%>
             </td>
             <td>
               <%= item.donor %>

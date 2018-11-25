@@ -12,6 +12,20 @@ class Backoffice::ItemsController < ApplicationController
     end
   end
 
+  def sell
+    @item = Item.find(params[:id])
+    @item.amount = @item.amount - 1
+    if @item.amount == 0
+      @item.destroy
+    else
+      @item.save
+    end
+    respond_to do |format|
+      format.html { redirect_to backoffice_items_list_path, notice: 'Quantidade do item diminuida.'}
+      format.js {  }
+    end
+  end
+
   def items_list
     @items = Item.all.order('updated_at DESC')
   end
@@ -30,7 +44,6 @@ class Backoffice::ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-
     respond_to do |format|
       if @item.save
         format.html { redirect_to backoffice_items_path, notice: 'Item foi criado com sucesso.' }
@@ -46,7 +59,7 @@ class Backoffice::ItemsController < ApplicationController
     @item = Item.find(params[:id])
 
     respond_to do |format|
-      if @item.update(item_params)
+      if @item.update(item_params_edit)
         format.html { redirect_to backoffice_items_list_path, notice: "Item foi atualizado com sucesso." }
         format.js { }
       else
@@ -69,5 +82,9 @@ class Backoffice::ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:id, :name, :amount, :value, :donor, :receiver,
                                  :internal, :used, :lost, :used_product, :new_product)
+  end
+  def item_params_edit
+    params.require(:item).permit(:id, :name, :amount, :value, :donor, :receiver,
+                                 :internal, :used, :lost, :used_product, :new_product, :created_at)
   end
 end

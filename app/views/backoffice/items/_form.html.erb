@@ -90,7 +90,7 @@
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Doador interno?</label>
             <div class="col-sm-9">
-              <%= f.select :used, options_for_select([['Não', false], ['Sim', true]], :selected => f.object.used),
+              <%= f.select :internal, options_for_select([['Não', false], ['Sim', true]], :selected => f.object.used),
                       {}, class: "form-control", required: true %>
             </div>
           </div>
