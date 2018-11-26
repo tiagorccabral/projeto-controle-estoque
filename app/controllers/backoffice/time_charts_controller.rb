@@ -2,7 +2,7 @@
 
 class Backoffice::TimeChartsController < ApplicationController
   before_action :authenticate_user!
-  before_action  :set_time_chart, only: [:show, :edit, :destroy]
+  before_action :set_time_chart, only: [:show, :edit, :destroy]
 
   # GET /time_charts
   # GET /time_charts.json
@@ -13,11 +13,23 @@ class Backoffice::TimeChartsController < ApplicationController
   # GET / compare_chart
   def chart_new
     @time_chart = TimeChart.new
+    @charts = []
+    if session[:time_chart_ids] != nil
+      session[:time_chart_ids].each do |time_chart_id|
+        @charts << TimeChart.find(time_chart_id)
+      end
+      @charts.sort! { |a, b|  a.report_date <=> b.report_date}
+    else
+      respond_to do |format|
+        format.html { redirect_to backoffice_time_charts_path, notice: 'Selecione algum relatório para geral um gráfico.' }
+      end
+    end
   end
 
   # POST / compare_chart
   def chart_create
     @charts = []
+    session[:time_chart_ids] = params['time_chart_ids']
     if params['time_chart_ids'] != nil
       params['time_chart_ids'].each do |time_chart_id|
         @charts << TimeChart.find(time_chart_id)

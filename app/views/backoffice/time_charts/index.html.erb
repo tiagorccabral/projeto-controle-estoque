@@ -27,22 +27,22 @@
     <div class="card-body">
       <h4 class="card-title">Listagem de relatórios</h4>
       <div class="table-responsive">
-        <table class="table table">
-          <thead>
-          <tr>
-            <th>
-              Nome do relatório
-            </th>
-            <th colspan="3">
-              Ações
-            </th>
-            <th>
-              Relatório
-            </th>
-          </tr>
-          </thead>
-          <tbody>
-          <%= form_for( :time_chart, :url => url_for(:controller => 'backoffice/time_charts', :action => 'chart_new')) do |f| %>
+        <%= form_for(:time_chart, :url => url_for(:controller => 'backoffice/time_charts', :action => 'chart_new')) do |f| %>
+          <table class="table table">
+            <thead>
+            <tr>
+              <th>
+                Nome do relatório
+              </th>
+              <th colspan="3">
+                Ações
+              </th>
+              <th>
+                Relatório
+              </th>
+            </tr>
+            </thead>
+            <tbody>
             <% @time_charts.each do |time_chart| %>
               <tr>
                 <td>
@@ -73,11 +73,11 @@
               </tr>
             <% end %>
             </tbody>
-            </table>
-            <div class="form-group">
-              <%= f.submit('Gerar gráfico', class: 'btn btn-success rounded') %>
-            </div>
-          <% end %>
+          </table>
+          <div class="form-group">
+            <%= f.submit('Gerar gráfico', class: 'btn btn-success rounded') %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
