@@ -5,16 +5,22 @@ class Backoffice::ItemsController < ApplicationController
   def index
     @items = Item.all
     @total_value = 0.0
-    @total_amount = 0
+    @total_amount =0
+    @value_sold = 0.0
+    @total_sold =0
     @items.each do |item|
       @total_amount += item.amount
       @total_value += item.value.to_f * item.amount.to_i
+      @value_sold += item.value_sold.to_f
+      @total_sold += item.total_sold.to_i
     end
   end
 
   def sell
     @item = Item.find(params[:id])
     @item.amount = @item.amount - 1
+    @item.total_sold = @item.total_sold + 1
+    @item.value_sold = @item.value_sold +  @item.value
     if @item.amount == 0
       @item.destroy
     else

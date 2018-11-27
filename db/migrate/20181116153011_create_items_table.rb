@@ -6,6 +6,8 @@ class CreateItemsTable < ActiveRecord::Migration[5.2]
       t.string :name
       t.integer :amount
       t.float :value
+      t.float :value_sold, default: 0.0
+      t.integer :total_sold, default: 0
       t.string :donor, default: "Anônimo"
       t.string :receiver
       t.boolean :internal, default: false

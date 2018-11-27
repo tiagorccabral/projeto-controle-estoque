@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2018_11_25_143030) do
     t.string "name"
     t.integer "amount"
     t.float "value"
+    t.float "value_sold", default: 0.0
+    t.integer "total_sold", default: 0
     t.string "donor", default: "Anônimo"
     t.string "receiver"
     t.boolean "internal", default: false

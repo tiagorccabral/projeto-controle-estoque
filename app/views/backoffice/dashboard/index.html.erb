@@ -49,12 +49,12 @@
           <div class="float-right">
             <p class="mb-0 text-right">Vendas</p>
             <div class="fluid-container">
-              <h3 class="font-weight-medium text-right mb-0">5693</h3>
+              <h3 class="font-weight-medium text-right mb-0"><%= @total_sold %></h3>
             </div>
           </div>
         </div>
         <p class="text-muted mt-3 mb-0">
-          <i class="mdi mdi-calendar mr-1" aria-hidden="true"></i> Vendas mensais
+          <i class="mdi mdi-calendar mr-1" aria-hidden="true"></i> Vendas totais até o momento
         </p>
       </div>
     </div>
@@ -67,9 +67,9 @@
             <i class="mdi mdi-account-location text-info icon-lg"></i>
           </div>
           <div class="float-right">
-            <p class="mb-0 text-right">Doadores</p>
+            <p class="mb-0 text-right">Valor total arrecadado</p>
             <div class="fluid-container">
-              <h3 class="font-weight-medium text-right mb-0">246</h3>
+              <h3 class="font-weight-medium text-right mb-0"><%= @value_sold %></h3>
             </div>
           </div>
         </div>
