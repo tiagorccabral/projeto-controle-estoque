@@ -58,11 +58,28 @@
             <%= @item.receiver %>
           </td>
           <td>
-            <%= @item.internal %>
+            <% if @item.internal %>
+              Sim
+            <% else %>
+              Não
+            <% end %>
           </td>
         </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+      <div class="card card-statistics">
+        <div class="card-body">
+          <h3>Observações</h3>
+          <p>
+            <%= @item.observation %>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 
