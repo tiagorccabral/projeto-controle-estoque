@@ -86,11 +86,13 @@ class Backoffice::ItemsController < ApplicationController
 
   private
   def item_params
-    params.require(:item).permit(:id, :name, :amount, :value, :donor, :receiver,
-                                 :internal, :used, :lost, :used_product, :new_product)
+    params.require(:item).permit(:id, :name, :observation, :amount, :value,
+                                 :donor, :receiver, :internal, :used, :lost,
+                                 :used_product, :new_product)
   end
   def item_params_edit
-    params.require(:item).permit(:id, :name, :amount, :value, :donor, :receiver,
-                                 :internal, :used, :lost, :used_product, :new_product, :created_at)
+    params.require(:item).permit(:id, :name, :observation, :amount, :value,
+                                 :donor, :receiver, :internal, :used, :lost,
+                                 :used_product, :new_product, :created_at)
   end
 end

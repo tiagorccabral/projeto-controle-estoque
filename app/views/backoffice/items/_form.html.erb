@@ -64,6 +64,25 @@
         </div>
       </div>
 
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Observações</label>
+            <% if @item.observation != nil %>
+              <%= f.text_area(:observation,
+                               class: "form-control",
+                               placeholder: @item.observation,
+                               required: true) %>
+            <% else %>
+              <%= f.text_area(:observation,
+                               class: "form-control",
+                               placeholder: "Observações sobre o produto",
+                               required: true) %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
       <p class="card-description">
         Informações gerais a respeito da doação
       </p>
