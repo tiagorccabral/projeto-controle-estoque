@@ -1,0 +1,89 @@
+<div class="row purchace-popup">
+  <div class="col-12">
+    <span class="d-block d-md-flex align-items-center">
+      <%= link_to "/backoffice/inventory_items/new", class: "btn btn-success btn-lg btn-fw" do %>
+        <i class="mdi mdi-plus-circle" style="color: white"></i>
+        <span class="menu-title">Novo bem</span>
+      <% end %>
+      <%= link_to "/backoffice/inventory_items", class: "btn btn-primary btn-lg btn-fw" do %>
+              <i class="mdi mdi-view-list" style="color: white"></i>
+              <span class="menu-title">Painel inicial</span>
+            <% end %>
+      <i class="mdi mdi-close ml-auto popup-dismiss d-none d-md-block"></i>
+    </span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Listagem completa bens de patrimônio</h4>
+    <div class="table-responsive" style="overflow-y: auto;">
+      <table class="table table-striped Flipped">
+        <thead>
+        <tr>
+          <th>
+            Nome do produto
+          </th>
+          <th>
+            Código
+          </th>
+          <th>
+            Número de série
+          </th>
+          <th>
+            Modelo
+          </th>
+          <th>
+            Data de aquisição
+          </th>
+          <th>
+            Informações
+          </th>
+          <th>
+            Editar
+          </th>
+          <th>
+            Excluir
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @inventory_items.each do |inventory_item| %>
+          <tr>
+            <td class="py-1">
+              <%= inventory_item.name %>
+            </td>
+            <td>
+              <%= inventory_item.code %>
+            </td>
+            <td>
+              <%= inventory_item.serial_number %>
+            </td>
+            <td>
+              <%= inventory_item.model %>
+            </td>
+            <td>
+              <%= inventory_item.date_of_acquisition.strftime("%d/%m/%Y") %>
+            </td>
+            <td>
+              <%= link_to "/backoffice/inventory_items/#{inventory_item.id}", class: "text-info" do %>
+                <i class="fa fa-reply fa-fw"></i>Informações</a>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to "/backoffice/inventory_items/#{inventory_item.id}/edit", class: "text-primary" do %>
+                <i class="fa fa-reply fa-fw"></i>Editar</a>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to "/backoffice/inventory_items/#{inventory_item.id}", method: "delete", data: {confirm: "Tem certeza?"}, class: "text-danger" do %>
+                <i class="fa fa-reply fa-fw"></i>Excluir</a>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>

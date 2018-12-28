@@ -1,0 +1,62 @@
+<h1>Inventário de bens patrimôniais</h1>
+<div class="row purchace-popup">
+  <div class="col-12">
+    <span class="d-block d-md-flex align-items-center">
+      <%= link_to "/backoffice/inventory_items/new", class: "btn btn-success btn-lg btn-fw" do %>
+        <i class="mdi mdi-plus-circle" style="color: white"></i>
+        <span class="menu-title">Novo bem</span>
+      <% end %>
+      <%= link_to "/backoffice/inventory_list", class: "btn btn-primary btn-lg btn-fw" do %>
+              <i class="mdi mdi-view-list" style="color: white"></i>
+              <span class="menu-title">Listagem de bens</span>
+            <% end %>
+    </span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+    <div class="card card-statistics">
+      <div class="card-body">
+        <div class="clearfix">
+          <div class="float-left">
+            <i class="mdi mdi-file-document-box text-danger icon-lg"></i>
+          </div>
+          <div class="float-right">
+            <p class="mb-0 text-right">Total de bens de patrimônio</p>
+            <div class="fluid-container">
+              <h3 class="font-weight-medium text-right mb-0"><%= @total_amount %> itens</h3>
+            </div>
+          </div>
+        </div>
+        <p class="text-muted mt-3 mb-0">
+          <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> Ultima item adicionado em:
+          <% if @inventory_items.last %>
+            <%= @inventory_items.last.created_at.strftime("%d/%m/%Y") %>
+          <% else %>
+            Nenhum item cadastrado.
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+    <div class="card card-statistics">
+      <div class="card-body">
+        <div class="clearfix">
+          <div class="float-left">
+            <i class="mdi mdi-receipt text-warning icon-lg"></i>
+          </div>
+          <div class="float-right">
+            <p class="mb-0 text-right">Valor total dos bens de patrimônio</p>
+            <div class="fluid-container">
+              <h3 class="font-weight-medium text-right mb-0"><%= number_to_currency(@total_value_depreciated, :unit => "R$ ", :separator => ",", :delimiter => ".") %></h3>
+            </div>
+          </div>
+        </div>
+        <p class="text-muted mt-3 mb-0">
+          <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i> Considerando apenas os valores com depreciação
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
