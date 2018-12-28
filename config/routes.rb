@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :users
     resources :items
     resources :time_charts
+    resources :inventory_items
+    get '/inventory_list', to: 'inventory_items#inventory_list'
     get 'compare_charts', to: 'time_charts#chart_new'
     post 'compare_charts', to: 'time_charts#chart_create'
     get '/items_list', to: 'items#items_list'

@@ -1,0 +1,301 @@
+<div class="card">
+  <div class="card-body">
+    <%= form_for [:backoffice, @inventory_item] do |f| %>
+      <p class="card-description">
+        Informações sobre o item
+      </p>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Nome do item</label>
+            <div class="col-sm-9">
+              <% if @inventory_item.name != nil %>
+                <%= f.text_field(:name,
+                                 class: "form-control",
+                                 placeholder: @inventory_item.name,
+                                 required: true) %>
+              <% else %>
+                <%= f.text_field(:name,
+                                 class: "form-control",
+                                 placeholder: "Nome do item",
+                                 required: true) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Código do item</label>
+            <div class="col-sm-9">
+              <% if @inventory_item.code != nil %>
+                <%= f.text_field(:code,
+                                 class: "form-control",
+                                 placeholder: @inventory_item.code,
+                                 required: true) %>
+              <% else %>
+                <%= f.text_field(:code,
+                                 class: "form-control",
+                                 placeholder: "Código do item",
+                                 required: true) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Responsável</label>
+            <div class="col-sm-9">
+              <% if @inventory_item.responsible != nil %>
+                <%= f.text_field(:responsible,
+                                 class: "form-control",
+                                 placeholder: @inventory_item.responsible,
+                                 required: true) %>
+              <% else %>
+                <%= f.text_field(:responsible,
+                                 class: "form-control",
+                                 placeholder: "Responsável pelo item",
+                                 required: true) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Área</label>
+            <div class="col-sm-9">
+              <% if @inventory_item.area != nil %>
+                <%= f.text_field(:area,
+                                 class: "form-control",
+                                 placeholder: @inventory_item.area,
+                                 required: true) %>
+              <% else %>
+                <%= f.text_field(:area,
+                                 class: "form-control",
+                                 placeholder: "Área",
+                                 required: true) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Forma de Aquisição</label>
+            <div class="col-sm-9">
+              <% if @inventory_item.acquisition_mode != nil %>
+                <%= f.text_field(:acquisition_mode,
+                                 class: "form-control",
+                                 placeholder: @inventory_item.acquisition_mode,
+                                 required: true) %>
+              <% else %>
+                <%= f.text_field(:acquisition_mode,
+                                 class: "form-control",
+                                 placeholder: "Forma de Aquisição",
+                                 required: true) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Data de Aquisição</label>
+            <div class="col-sm-9">
+              <%= f.date_field(:date_of_acquisition, class: "form-control") %>
+<!--              <input class="form-control" name="date_of_acquisition" id="datefield" type="datetime-local" min="2015-12-01"/>-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Idade em meses</label>
+            <div class="col-sm-9">
+              <% if @inventory_item.age != nil %>
+                <%= f.number_field(:age,
+                                   class: "form-control",
+                                   placeholder: @inventory_item.age,
+                                   min: 0,
+                                   required: true) %>
+              <% else %>
+                <%= f.number_field(:age,
+                                 class: "form-control",
+                                 placeholder: "12",
+                                 min: 0,
+                                 required: true) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Valor R$</label>
+            <div class="col-sm-9">
+              <% if @inventory_item.value != nil %>
+                <%= f.number_field(:value,
+                                   class: "form-control",
+                                   placeholder: @inventory_item.value,
+                                   min: 0,
+                                   required: true) %>
+              <% else %>
+                <%= f.number_field(:value,
+                                   class: "form-control",
+                                   placeholder: "Valor do produto (individualmente)",
+                                   min: 0,
+                                   required: true) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Estado de conservação</label>
+            <div class="col-sm-9">
+              <% if @inventory_item.conservation_state != nil %>
+                <%= f.text_field(:conservation_state,
+                                   class: "form-control",
+                                   placeholder: @inventory_item.conservation_state,
+                                   required: true) %>
+              <% else %>
+                <%= f.text_field(:conservation_state,
+                                 class: "form-control",
+                                 placeholder: "EX: Pouco usado",
+                                 min: 0,
+                                 required: true) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Vida útil em anos</label>
+            <div class="col-sm-9">
+              <% if @inventory_item.lifespan != nil %>
+                <%= f.number_field(:lifespan,
+                                   class: "form-control",
+                                   placeholder: @inventory_item.lifespan,
+                                   min: 0,
+                                   required: true) %>
+              <% else %>
+                <%= f.number_field(:lifespan,
+                                   class: "form-control",
+                                   placeholder: "12 anos",
+                                   min: 0,
+                                   required: true) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Valor atual R$</label>
+            <div class="col-sm-9">
+              <% if @inventory_item.current_value != nil %>
+                <%= f.number_field(:current_value,
+                                   class: "form-control",
+                                   placeholder: @inventory_item.current_value,
+                                   min: 0,
+                                   required: true) %>
+              <% else %>
+                <%= f.number_field(:current_value,
+                                   class: "form-control",
+                                   placeholder: "12",
+                                   min: 0,
+                                   required: true) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Depreciação R$</label>
+            <div class="col-sm-9">
+              <% if @inventory_item.depreciation != nil %>
+                <%= f.number_field(:depreciation,
+                                   class: "form-control",
+                                   placeholder: @inventory_item.depreciation,
+                                   min: 0,
+                                   required: true) %>
+              <% else %>
+                <%= f.number_field(:depreciation,
+                                   class: "form-control",
+                                   placeholder: "Depreciação",
+                                   min: 0,
+                                   required: true) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Número de série</label>
+            <div class="col-sm-9">
+              <% if @inventory_item.serial_number != nil %>
+                <%= f.text_field(:serial_number,
+                                 class: "form-control",
+                                 placeholder: @inventory_item.serial_number,
+                                 required: true) %>
+              <% else %>
+                <%= f.text_field(:serial_number,
+                                 class: "form-control",
+                                 placeholder: "Ex: IF-21316",
+                                 required: true) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Modelo</label>
+            <div class="col-sm-9">
+              <% if @inventory_item.model != nil %>
+                <%= f.text_field(:model,
+                                 class: "form-control",
+                                 placeholder: @inventory_item.model,
+                                 required: true) %>
+              <% else %>
+                <%= f.text_field(:model,
+                                 class: "form-control",
+                                 placeholder: "Modelo do item",
+                                 required: true) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Local de armazenamento</label>
+            <div class="col-sm-9">
+              <% if @inventory_item.storage_location != nil %>
+                <%= f.text_field(:storage_location,
+                                 class: "form-control",
+                                 placeholder: @inventory_item.storage_location,
+                                 required: true) %>
+              <% else %>
+                <%= f.text_field(:storage_location,
+                                 class: "form-control",
+                                 placeholder: "Ex: Depósito central",
+                                 required: true) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.submit('Salvar', class: 'btn btn-success rounded') %>
+        <%= link_to 'Voltar', backoffice_inventory_items_path, class: 'btn btn-primary rounded' %>
+      </div>
+    <% end %>
+  </div>
+</div>

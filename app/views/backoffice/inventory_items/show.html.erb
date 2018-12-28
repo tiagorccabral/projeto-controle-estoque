@@ -1,0 +1,162 @@
+<div class="row purchace-popup">
+  <div class="col-12">
+    <span class="d-block d-md-flex align-items-center">
+      <%= link_to "/backoffice/inventory_items/new", class: "btn btn-success btn-lg btn-fw" do %>
+        <i class="mdi mdi-plus-circle" style="color: white"></i>
+        <span class="menu-title">Novo bem</span>
+      <% end %>
+      <%= link_to "/backoffice/inventory_list", class: "btn btn-primary btn-lg btn-fw" do %>
+              <i class="mdi mdi-view-list" style="color: white"></i>
+              <span class="menu-title">Listagem de bens</span>
+            <% end %>
+    </span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h2><%= @inventory_item.name %></h2>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>
+            Nome
+          </th>
+          <th>
+            Código
+          </th>
+          <th>
+            Responsável
+          </th>
+          <th>
+            Área
+          </th>
+          <th>
+            Estado de conservação
+          </th>
+          <th>
+            Data de aquisição
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="py-1">
+            <%= @inventory_item.name %>
+          </td>
+          <td>
+            <%= @inventory_item.code %>
+          </td>
+          <td>
+            <%= @inventory_item.responsible %>
+          </td>
+          <td>
+            <%= @inventory_item.area %>
+          </td>
+          <td>
+            <%= @inventory_item.conservation_state %>
+          </td>
+          <td>
+            <%= @inventory_item.date_of_acquisition.strftime("%d/%m/%Y") %>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 grid-margin stretch-card">
+      <div class="card card-statistics">
+        <div class="card-body">
+          <h3>Local de armazenamento</h3>
+          <p>
+            <%= @inventory_item.storage_location %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 grid-margin stretch-card">
+      <div class="card card-statistics">
+        <div class="card-body">
+          <h3>Forma de aquisição</h3>
+          <p>
+            <%= @inventory_item.acquisition_mode %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 grid-margin stretch-card">
+      <div class="card card-statistics">
+        <div class="card-body">
+          <h3>Valor em R$</h3>
+          <p>
+            <%= number_to_currency(@inventory_item.value, :unit => "R$ ", :separator => ",", :delimiter => ".") %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 grid-margin stretch-card">
+      <div class="card card-statistics">
+        <div class="card-body">
+          <h3>Valor atual em R$</h3>
+          <p>
+            <%= number_to_currency(@inventory_item.current_value, :unit => "R$ ", :separator => ",", :delimiter => ".") %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 grid-margin stretch-card">
+      <div class="card card-statistics">
+        <div class="card-body">
+          <h3>Depreciação em R$</h3>
+          <p>
+            <%= number_to_currency(@inventory_item.depreciation, :unit => "R$ ", :separator => ",", :delimiter => ".") %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 grid-margin stretch-card">
+      <div class="card card-statistics">
+        <div class="card-body">
+          <h3>Idade em meses</h3>
+          <p>
+            <%= @inventory_item.age %> mês(meses)
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 grid-margin stretch-card">
+      <div class="card card-statistics">
+        <div class="card-body">
+          <h3>Vida útil em anos</h3>
+          <p>
+            <%= @inventory_item.lifespan %> ano(s)
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 grid-margin stretch-card">
+      <div class="card card-statistics">
+        <div class="card-body">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="form-group">
+        <%= link_to 'Editar', "/backoffice/inventory_items/#{@inventory_item.id}/edit", class: 'btn btn-primary rounded' %>
+        <%= link_to 'Voltar', backoffice_inventory_items_path, class: 'btn btn-primary rounded' %>
+      </div>
+    </div>
+  </div>
+
+</div>
