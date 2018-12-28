@@ -1,0 +1,66 @@
+<div class="row purchace-popup">
+  <div class="col-12">
+    <span class="d-block d-md-flex align-items-center">
+      <%= link_to "/backoffice/categories/new", class: "btn btn-success btn-lg btn-fw" do %>
+        <i class="mdi mdi-plus-circle" style="color: white"></i>
+        <span class="menu-title">Nova categoria</span>
+      <% end %>
+    </span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Listagem completa de categorias</h4>
+    <div class="table-responsive" style="overflow-y: auto;">
+      <table class="table table-striped Flipped">
+        <thead>
+        <tr>
+          <th>
+            Nome da categoria
+          </th>
+          <th>
+            Criada em
+          </th>
+          <th>
+            Informações
+          </th>
+          <th>
+            Editar
+          </th>
+          <th>
+            Excluir
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @categories.each do |category| %>
+          <tr>
+            <td class="py-1">
+              <%= category.name %>
+            </td>
+            <td>
+              <%= category.created_at.strftime("%d/%m/%Y") %>
+            </td>
+            <td>
+              <%= link_to "/backoffice/categories/#{category.id}", class: "text-info" do %>
+                <i class="fa fa-reply fa-fw"></i>Informações</a>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to "/backoffice/categories/#{category.id}/edit", class: "text-primary" do %>
+                <i class="fa fa-reply fa-fw"></i>Editar</a>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to "/backoffice/categories/#{category.id}", method: "delete", data: {confirm: "Tem certeza?"}, class: "text-danger" do %>
+                <i class="fa fa-reply fa-fw"></i>Excluir</a>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
