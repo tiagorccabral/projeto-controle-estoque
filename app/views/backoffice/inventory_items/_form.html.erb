@@ -45,6 +45,17 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Categoria</label>
+            <div class="col-sm-9">
+              <%= f.collection_select(:category_ids, Category.order(:name), :id,
+                                      :name, {}, {class: 'form-control',
+                                       placeholder: @inventory_item.categories.name, required:true})
+              %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group row">
             <label class="col-sm-3 col-form-label">Responsável</label>
             <div class="col-sm-9">
               <% if @inventory_item.responsible != nil %>
@@ -104,7 +115,7 @@
             <label class="col-sm-3 col-form-label">Data de Aquisição</label>
             <div class="col-sm-9">
               <%= f.date_field(:date_of_acquisition, class: "form-control") %>
-<!--              <input class="form-control" name="date_of_acquisition" id="datefield" type="datetime-local" min="2015-12-01"/>-->
+              <!--              <input class="form-control" name="date_of_acquisition" id="datefield" type="datetime-local" min="2015-12-01"/>-->
             </div>
           </div>
         </div>
@@ -122,10 +133,10 @@
                                    required: true) %>
               <% else %>
                 <%= f.number_field(:age,
-                                 class: "form-control",
-                                 placeholder: "12",
-                                 min: 0,
-                                 required: true) %>
+                                   class: "form-control",
+                                   placeholder: "12",
+                                   min: 0,
+                                   required: true) %>
               <% end %>
             </div>
           </div>
@@ -158,9 +169,9 @@
             <div class="col-sm-9">
               <% if @inventory_item.conservation_state != nil %>
                 <%= f.text_field(:conservation_state,
-                                   class: "form-control",
-                                   placeholder: @inventory_item.conservation_state,
-                                   required: true) %>
+                                 class: "form-control",
+                                 placeholder: @inventory_item.conservation_state,
+                                 required: true) %>
               <% else %>
                 <%= f.text_field(:conservation_state,
                                  class: "form-control",
