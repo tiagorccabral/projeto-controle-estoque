@@ -1,38 +1,57 @@
 <div class="row purchace-popup">
   <div class="col-12">
     <span class="d-block d-md-flex align-items-center">
-      <%= link_to "/backoffice/inventory_items/new", class: "btn btn-success btn-lg btn-fw" do %>
+      <%= link_to "/backoffice/categories/new", class: "btn btn-success btn-lg btn-fw" do %>
         <i class="mdi mdi-plus-circle" style="color: white"></i>
-        <span class="menu-title">Novo bem</span>
+        <span class="menu-title">Nova categoria</span>
       <% end %>
-      <%= link_to "/backoffice/inventory_items", class: "btn btn-primary btn-lg btn-fw" do %>
-              <i class="mdi mdi-view-list" style="color: white"></i>
-              <span class="menu-title">Painel inicial</span>
-            <% end %>
     </span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+    <div class="card card-statistics">
+      <div class="card-body">
+        <div class="clearfix">
+          <div class="float-left">
+            <i class="mdi mdi-tag text-danger icon-lg"></i>
+          </div>
+          <div class="float-right">
+            <p class="mb-0 text-right">Total de categorias</p>
+            <div class="fluid-container">
+              <% if Category.last != nil %>
+                <div class="card-body">
+                  <h3 class="font-weight-medium text-right mb-0">
+                    <%= Category.count %> categorias
+                  </h3>
+                </div>
+              <% end %>
+              <h3 class="font-weight-medium text-right mb-0"><%= @total_amount %></h3>
+            </div>
+          </div>
+        </div>
+        <p class="text-muted mt-3 mb-0">
+          <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i>Quantidade total de categorias
+        </p>
+      </div>
+    </div>
   </div>
 </div>
 <div class="card">
   <div class="card-body">
-    <h4 class="card-title">Listagem completa bens de patrimônio</h4>
+    <h4 class="card-title">Listagem completa de categorias</h4>
     <div class="table-responsive" style="overflow-y: auto;">
-      <table class="table table-striped Flipped" id="inventory-items-datatable" data-source="<%= backoffice_inventory_list_path(format: :json) %>">
+      <table class="table table-striped Flipped" id="categories-datatable" data-source="<%= backoffice_categories_path(format: :json) %>">
         <thead>
         <tr>
           <th>
-            Nome do item
+            Nome da categoria
           </th>
           <th>
-            Código
+            Associado a
           </th>
           <th>
-            Valor
-          </th>
-          <th>
-            Modelo
-          </th>
-          <th>
-            Data de aquisição
+            Criado em
           </th>
           <th>
             Informações
@@ -51,13 +70,14 @@
     </div>
   </div>
 </div>
+</div>
 
 <script charset="utf-8">
     jQuery(document).ready(function() {
-        $('#inventory-items-datatable').dataTable({
+        $('#categories-datatable').dataTable({
             "processing": true,
             "serverSide": true,
-            "ajax": $('#inventory-items-datatable').data('source'),
+            "ajax": $('#categories-datatable').data('source'),
             "pagingType": "full_numbers",
             "oLanguage": {
                 "sEmptyTable": "Nenhum registro encontrado",
@@ -85,16 +105,16 @@
             "columns": [
                 {"data": "name"},
                 {
-                    "data": "code"
+                    "data": "category_use",
+                    "render": function (data) {
+                        if (data == 0) return "Nenhum bem";
+                        if (data == 1) return "1 bem";
+                        if (data > 1) return (data + " bens");
+                    },
+                    "bSortable": false,
                 },
                 {
-                    "data": "value"
-                },
-                {
-                    "data": "model"
-                },
-                {
-                    "data": "date_of_acquisition",
+                    "data": "created_at",
                     "type": "date",
                     "render": function (data) {
                         var date = new Date(data);

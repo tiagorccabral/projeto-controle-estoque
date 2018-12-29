@@ -1,4 +1,5 @@
 class Backoffice::InventoryItemsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_inventory_item, only: [:show, :edit, :update, :destroy]
 
   # GET /inventory_items
@@ -6,16 +7,22 @@ class Backoffice::InventoryItemsController < ApplicationController
   def index
     @inventory_items = InventoryItem.all
     @total_amount = 0
-    @total_value_depreciated = 0.0
+    @total_current_value = 0.0
+    @total_value = 0.0
     @inventory_items.each do |inventory_item|
       @total_amount += 1
-      @total_value_depreciated += inventory_item.value - inventory_item.depreciation
+      @total_current_value += inventory_item.current_value
+      @total_value += inventory_item.value
     end
   end
 
   # GET /inventory_list
   def inventory_list
     @inventory_items = InventoryItem.all.order('updated_at DESC')
+    respond_to do |format|
+      format.html
+      format.json { render json: InventoryItemDatatable.new(params, view_context: view_context) }
+    end
   end
 
   # GET /inventory_items/1
@@ -86,6 +93,7 @@ class Backoffice::InventoryItemsController < ApplicationController
                                            :serial_number, :model,
                                            :storage_location, :age,
                                            :value, :lifespan, :current_value,
-                                           :date_of_acquisition, :depreciation)
+                                           :date_of_acquisition, :depreciation,
+                                           :category_ids)
   end
 end

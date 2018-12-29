@@ -26,6 +26,9 @@
             Código
           </th>
           <th>
+            Categoria
+          </th>
+          <th>
             Responsável
           </th>
           <th>
@@ -46,6 +49,9 @@
           </td>
           <td>
             <%= @inventory_item.code %>
+          </td>
+          <td>
+            <%= @inventory_item.categories[0].name %>
           </td>
           <td>
             <%= @inventory_item.responsible %>
