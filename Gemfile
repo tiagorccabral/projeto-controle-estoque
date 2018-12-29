@@ -41,6 +41,10 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# DataTables Gems
+gem 'ajax-datatables-rails', '~> 1.0.0'
+gem 'jquery-datatables', '~> 1.10.19.1'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
