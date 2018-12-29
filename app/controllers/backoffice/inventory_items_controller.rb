@@ -19,6 +19,10 @@ class Backoffice::InventoryItemsController < ApplicationController
   # GET /inventory_list
   def inventory_list
     @inventory_items = InventoryItem.all.order('updated_at DESC')
+    respond_to do |format|
+      format.html
+      format.json { render json: InventoryItemDatatable.new(params, view_context: view_context) }
+    end
   end
 
   # GET /inventory_items/1

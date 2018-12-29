@@ -9,7 +9,6 @@
               <i class="mdi mdi-view-list" style="color: white"></i>
               <span class="menu-title">Painel inicial</span>
             <% end %>
-      <i class="mdi mdi-close ml-auto popup-dismiss d-none d-md-block"></i>
     </span>
   </div>
 </div>
@@ -17,17 +16,17 @@
   <div class="card-body">
     <h4 class="card-title">Listagem completa bens de patrimônio</h4>
     <div class="table-responsive" style="overflow-y: auto;">
-      <table class="table table-striped Flipped">
+      <table class="table table-striped Flipped" id="inventory-items-datatable" data-source="<%= backoffice_inventory_list_path(format: :json) %>">
         <thead>
         <tr>
           <th>
-            Nome do produto
+            Nome do item
           </th>
           <th>
             Código
           </th>
           <th>
-            Número de série
+            Valor
           </th>
           <th>
             Modelo
@@ -42,48 +41,80 @@
             Editar
           </th>
           <th>
-            Excluir
+            Deletar
           </th>
         </tr>
         </thead>
         <tbody>
-        <% @inventory_items.each do |inventory_item| %>
-          <tr>
-            <td class="py-1">
-              <%= inventory_item.name %>
-            </td>
-            <td>
-              <%= inventory_item.code %>
-            </td>
-            <td>
-              <%= inventory_item.serial_number %>
-            </td>
-            <td>
-              <%= inventory_item.model %>
-            </td>
-            <td>
-              <%= inventory_item.date_of_acquisition.strftime("%d/%m/%Y") %>
-            </td>
-            <td>
-              <%= link_to "/backoffice/inventory_items/#{inventory_item.id}", class: "text-info" do %>
-                <i class="fa fa-reply fa-fw"></i>Informações</a>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to "/backoffice/inventory_items/#{inventory_item.id}/edit", class: "text-primary" do %>
-                <i class="fa fa-reply fa-fw"></i>Editar</a>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to "/backoffice/inventory_items/#{inventory_item.id}", method: "delete", data: {confirm: "Tem certeza?"}, class: "text-danger" do %>
-                <i class="fa fa-reply fa-fw"></i>Excluir</a>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
         </tbody>
       </table>
     </div>
   </div>
 </div>
-</div>
+
+<script charset="utf-8">
+    jQuery(document).ready(function() {
+        $('#inventory-items-datatable').dataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": $('#inventory-items-datatable').data('source'),
+            "pagingType": "full_numbers",
+            "oLanguage": {
+                "sEmptyTable": "Nenhum registro encontrado",
+                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "_MENU_ resultados por página",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sZeroRecords": "Nenhum registro encontrado",
+                "sSearch": "Pesquisar",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Último"
+                },
+                "oAria": {
+                    "sSortAscending": ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                }
+            },
+            "columns": [
+                {"data": "name"},
+                {
+                    "data": "code"
+                },
+                {
+                    "data": "value"
+                },
+                {
+                    "data": "model"
+                },
+                {
+                    "data": "date_of_acquisition",
+                    "type": "date",
+                    "render": function (data) {
+                        var date = new Date(data);
+                        var month = date.getMonth() + 1;
+                        return ( date.getDate() + "/" + ((month >= 10) ? month : "0" + month) + "/" + date.getFullYear());
+                    }
+                },
+                {
+                    "data": "information",
+                    "bSortable": false,
+                },
+                {
+                    "data": "edit",
+                    "bSortable": false,
+                },
+                {
+                    "data": "delete",
+                    "bSortable": false,
+                },
+            ]
+        });
+    });
+</script>

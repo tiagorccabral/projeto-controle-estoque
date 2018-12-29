@@ -28,8 +28,8 @@ class CategoryDatatable < AjaxDatatablesRails::ActiveRecord
         name: record.name,
         created_at: record.created_at,
         category_use: record.inventory_items.count,
-        information: link_to("Informações", backoffice_category_path(record)),
-        edit: link_to("Editar", edit_backoffice_category_path(record), class: "text-warning"),
+        information: link_to("Informações", backoffice_category_path(record), class: "text-info"),
+        edit: link_to("Editar", edit_backoffice_category_path(record), class: "text-primary"),
         delete: link_to("Deletar", backoffice_category_path(record), method: "delete", data: {confirm: "Tem certeza?"}, class: "text-danger"),
         DT_RowId:   record.id
       }
