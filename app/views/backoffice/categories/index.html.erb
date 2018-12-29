@@ -41,17 +41,17 @@
   <div class="card-body">
     <h4 class="card-title">Listagem completa de categorias</h4>
     <div class="table-responsive" style="overflow-y: auto;">
-      <table class="table table-striped Flipped">
+      <table class="table table-striped Flipped" id="categories-datatable" data-source="<%= backoffice_categories_path(format: :json) %>">
         <thead>
         <tr>
           <th>
             Nome da categoria
           </th>
           <th>
-            Bens associados
+            Associado a
           </th>
           <th>
-            Criada em
+            Criado em
           </th>
           <th>
             Informações
@@ -60,48 +60,58 @@
             Editar
           </th>
           <th>
-            Excluir
+            Deletar
           </th>
         </tr>
         </thead>
         <tbody>
-        <% @categories.each do |category| %>
-          <tr>
-            <td class="py-1">
-              <%= category.name %>
-            </td>
-            <td>
-              <% if category.inventory_items.count == 0  %>
-                Nenhum bem
-              <% elsif category.inventory_items.count == 1 %>
-                <%= category.inventory_items.count %> bem
-              <% else %>
-                <%= category.inventory_items.count %> bens
-              <% end %>
-            </td>
-            <td>
-              <%= category.created_at.strftime("%d/%m/%Y") %>
-            </td>
-            <td>
-              <%= link_to "/backoffice/categories/#{category.id}", class: "text-info" do %>
-                <i class="fa fa-reply fa-fw"></i>Informações</a>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to "/backoffice/categories/#{category.id}/edit", class: "text-primary" do %>
-                <i class="fa fa-reply fa-fw"></i>Editar</a>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to "/backoffice/categories/#{category.id}", method: "delete", data: {confirm: "Tem certeza?"}, class: "text-danger" do %>
-                <i class="fa fa-reply fa-fw"></i>Excluir</a>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
         </tbody>
       </table>
     </div>
   </div>
 </div>
 </div>
+
+<script charset="utf-8">
+    jQuery(document).ready(function() {
+        $('#categories-datatable').dataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": $('#categories-datatable').data('source'),
+            "pagingType": "full_numbers",
+            "columns": [
+                {"data": "name"},
+                {
+                    "data": "category_use",
+                    "render": function (data) {
+                        if (data == 0) return "Nenhum bem";
+                        if (data == 1) return "1 bem";
+                        if (data > 1) return (data + " bens");
+                    },
+                    "bSortable": false,
+                },
+                {
+                    "data": "created_at",
+                    "type": "date",
+                    "render": function (data) {
+                        var date = new Date(data);
+                        var month = date.getMonth() + 1;
+                        return ( date.getDate() + "/" + ((month >= 10) ? month : "0" + month) + "/" + date.getFullYear());
+                    }
+                },
+                {
+                    "data": "information",
+                    "bSortable": false,
+                },
+                {
+                    "data": "edit",
+                    "bSortable": false,
+                },
+                {
+                    "data": "delete",
+                    "bSortable": false,
+                },
+            ]
+        });
+    });
+</script>

@@ -6,6 +6,10 @@ class Backoffice::CategoriesController < ApplicationController
   # GET /categories.json
   def index
     @categories = Category.all
+    respond_to do |format|
+      format.html
+      format.json { render json: CategoryDatatable.new(params, view_context: view_context) }
+    end
   end
 
   # GET /categories/1

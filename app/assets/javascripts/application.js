@@ -14,6 +14,7 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require datatables
 //= require popper
 //= require toastr/toastr.min.js
 //= require Chart.bundle.min.js
