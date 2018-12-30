@@ -32,8 +32,13 @@ class Backoffice::ItemsController < ApplicationController
     end
   end
 
+  # GET /items_list
   def items_list
     @items = Item.all.order('updated_at DESC')
+    respond_to do |format|
+      format.html
+      format.json { render json: ItemDatatable.new(params, view_context: view_context) }
+    end
   end
 
   def show

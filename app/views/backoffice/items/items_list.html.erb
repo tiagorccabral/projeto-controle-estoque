@@ -16,7 +16,7 @@
   <div class="card-body">
     <h4 class="card-title">Listagem completa de doações</h4>
     <div class="table-responsive" style="overflow-y: auto;">
-      <table class="table table-striped Flipped">
+      <table class="table table-striped Flipped" id="items-datatable" data-source="<%= backoffice_items_list_path(format: :json) %>">
         <thead>
         <tr>
           <th>
@@ -55,52 +55,78 @@
         </tr>
         </thead>
         <tbody>
-        <% @items.each do |item| %>
-          <tr>
-            <td class="py-1">
-              <%= item.name %>
-            </td>
-            <td>
-              R$:&nbsp;<%= item.value %>
-            </td>
-            <td>
-              <%= item.amount %>
-            </td>
-            <td>
-              <%= link_to '-', backoffice_sell_item_path(id: item.id), class: 'btn btn-md btn-info', method: :put%>
-            </td>
-            <td>
-              <%= item.donor %>
-            </td>
-            <td>
-              <%= item.receiver %>
-            </td>
-            <td>
-              <%= item.internal %>
-            </td>
-            <td>
-              <%= item.created_at.strftime("%d/%m/%Y") %>
-            </td>
-            <td>
-              <%= link_to "/backoffice/items/#{item.id}", class: "text-info" do %>
-                <i class="fa fa-reply fa-fw"></i>Informações</a>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to "/backoffice/items/#{item.id}/edit", class: "text-primary" do %>
-                <i class="fa fa-reply fa-fw"></i>Editar</a>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to "/backoffice/items/#{item.id}", method: "delete", data: {confirm: "Tem certeza?"}, class: "text-danger" do %>
-                <i class="fa fa-reply fa-fw"></i>Excluir</a>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
         </tbody>
       </table>
     </div>
   </div>
 </div>
-</div>
+
+<script charset="utf-8">
+    jQuery(document).ready(function() {
+        $('#items-datatable').dataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": $('#items-datatable').data('source'),
+            "pagingType": "full_numbers",
+            "oLanguage": {
+                "sEmptyTable": "Nenhum registro encontrado",
+                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "_MENU_ resultados por página",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sZeroRecords": "Nenhum registro encontrado",
+                "sSearch": "Pesquisar",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Último"
+                },
+                "oAria": {
+                    "sSortAscending": ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                }
+            },
+            "columns": [
+                {"data": "name"},
+                {"data": "value"},
+                {"data": "amount"},
+                {"data": "sell_item"},
+                {"data": "donor"},
+                {"data": "receiver"},
+                {
+                    "data": "internal",
+                    "render": function(data) {
+                        console.log(data);
+                        return data
+                    }
+                },
+                {
+                    "data": "created_at",
+                    "type": "date",
+                    "render": function (data) {
+                        var date = new Date(data);
+                        var month = date.getMonth() + 1;
+                        return (date.getDate() + "/" + ((month >= 10) ? month : "0" + month) + "/" + date.getFullYear());
+                    }
+                },
+                {
+                    "data": "information",
+                    "bSortable": false,
+                },
+                {
+                    "data": "edit",
+                    "bSortable": false,
+                },
+                {
+                    "data": "delete",
+                    "bSortable": false,
+                }
+            ]
+        });
+    });
+</script>
