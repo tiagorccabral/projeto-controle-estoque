@@ -36,7 +36,7 @@ class ItemDatatable < AjaxDatatablesRails::ActiveRecord
         receiver: record.receiver,
         internal: record.internal,
         created_at: record.created_at,
-        sell_item: link_to("-", backoffice_sell_item_path(record), class: "btn btn-info"),
+        sell_item: link_to("-", backoffice_sell_item_path(id: record.id), method: "put", class: "btn btn-info"),
         information: link_to("Informações", backoffice_item_path(record), class: "text-info"),
         edit: link_to("Editar", edit_backoffice_item_path(record), class: "text-primary"),
         delete: link_to("Deletar", backoffice_item_path(record), method: "delete", data: {confirm: "Tem certeza?"}, class: "text-danger"),

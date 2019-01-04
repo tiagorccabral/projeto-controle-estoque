@@ -63,7 +63,11 @@
             <%= @inventory_item.conservation_state %>
           </td>
           <td>
-            <%= @inventory_item.date_of_acquisition.strftime("%d/%m/%Y") %>
+            <% if @inventory_item.date_of_acquisition %>
+              <%= @inventory_item.date_of_acquisition.strftime("%d/%m/%Y") %>
+            <% else %>
+              Não informado
+            <% end %>
           </td>
         </tr>
         </tbody>
