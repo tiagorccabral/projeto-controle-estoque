@@ -67,17 +67,31 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Código do produto</label>
+            <div class="col-sm-9">
+              <% if @item.code != nil %>
+                <%= f.text_field(:code,
+                                 class: "form-control",
+                                 placeholder: @item.code) %>
+              <% else %>
+                <%= f.text_field(:code,
+                                 class: "form-control",
+                                 placeholder: "Código do produto") %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group row">
             <label class="col-sm-3 col-form-label">Observações</label>
             <% if @item.observation != nil %>
               <%= f.text_area(:observation,
                                class: "form-control",
-                               placeholder: @item.observation,
-                               required: true) %>
+                               placeholder: @item.observation) %>
             <% else %>
               <%= f.text_area(:observation,
                                class: "form-control",
-                               placeholder: "Observações sobre o produto",
-                               required: true) %>
+                               placeholder: "Observações sobre o produto") %>
             <% end %>
           </div>
         </div>
@@ -110,7 +124,7 @@
             <label class="col-sm-3 col-form-label">Doador interno?</label>
             <div class="col-sm-9">
               <%= f.select :internal, options_for_select([['Não', false], ['Sim', true]], :selected => f.object.used),
-                      {}, class: "form-control", required: true %>
+                      {}, class: "form-control", required: false %>
             </div>
           </div>
         </div>
