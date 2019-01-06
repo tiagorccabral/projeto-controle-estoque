@@ -20,6 +20,9 @@
         <thead>
         <tr>
           <th>
+            Código do produto
+          </th>
+          <th>
             Nome do produto
           </th>
           <th>
@@ -92,6 +95,7 @@
                 }
             },
             "columns": [
+                {"data": "id"},
                 {"data": "name"},
                 {"data": "value"},
                 {"data": "amount"},
@@ -101,8 +105,7 @@
                 {
                     "data": "internal",
                     "render": function(data) {
-                        console.log(data);
-                        return data
+                        return data;
                     }
                 },
                 {
