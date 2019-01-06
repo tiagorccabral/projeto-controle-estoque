@@ -1,17 +1,13 @@
 <div class="row purchace-popup">
   <div class="col-12">
     <span class="d-block d-md-flex align-items-center">
-      <%= link_to "/backoffice/items/new", class: "btn btn-success btn-lg btn-fw" do %>
-        <i class="mdi mdi-plus-circle" style="color: white"></i>
-        <span class="menu-title">Nova doação</span>
-      <% end %>
-      <%= link_to "/backoffice/items", class: "btn btn-primary btn-lg btn-fw" do %>
+      <%= link_to "/backoffice/items_list", class: "btn btn-primary btn-lg btn-fw" do %>
               <i class="mdi mdi-view-list" style="color: white"></i>
-              <span class="menu-title">Painel inicial</span>
+              <span class="menu-title">Listagem de doações</span>
             <% end %>
-      <%= link_to "/backoffice/sold_list", class: "btn btn-info btn-lg btn-fw" do %>
+      <%= link_to "/backoffice/items", class: "btn btn-info btn-lg btn-fw" do %>
               <i class="mdi mdi-view-list" style="color: white"></i>
-              <span class="menu-title">Listagem de vendas</span>
+              <span class="menu-title">Painel inicial de doações</span>
             <% end %>
     </span>
   </div>
@@ -20,7 +16,7 @@
   <div class="card-body">
     <h4 class="card-title">Listagem completa de doações</h4>
     <div class="table-responsive" style="overflow-y: auto;">
-      <table class="table table-striped Flipped" id="items-datatable" data-source="<%= backoffice_items_list_path(format: :json) %>">
+      <table class="table table-striped Flipped" id="sold_items-datatable" data-source="<%= backoffice_sold_list_path(format: :json) %>">
         <thead>
         <tr>
           <th>
@@ -33,31 +29,13 @@
             Valor
           </th>
           <th>
-            Quantidade
+            Quantidade vendida
           </th>
           <th>
-            Vender uma unidade
+            Data 1ª venda
           </th>
           <th>
-            Nome do doador
-          </th>
-          <th>
-            Nome do recebedor
-          </th>
-          <th>
-            Foi funcionário interno?
-          </th>
-          <th>
-            Data de recebimento
-          </th>
-          <th>
-            Informações
-          </th>
-          <th>
-            Editar
-          </th>
-          <th>
-            Excluir
+            Data da última venda
           </th>
         </tr>
         </thead>
@@ -70,10 +48,10 @@
 
 <script charset="utf-8">
     jQuery(document).ready(function() {
-        $('#items-datatable').dataTable({
+        $('#sold_items-datatable').dataTable({
             "processing": true,
             "serverSide": true,
-            "ajax": $('#items-datatable').data('source'),
+            "ajax": $('#sold_items-datatable').data('source'),
             "pagingType": "full_numbers",
             "oLanguage": {
                 "sEmptyTable": "Nenhum registro encontrado",
@@ -99,19 +77,10 @@
                 }
             },
             "columns": [
-                {"data": "id"},
+                {"data": "code"},
                 {"data": "name"},
                 {"data": "value"},
                 {"data": "amount"},
-                {"data": "sell_item"},
-                {"data": "donor"},
-                {"data": "receiver"},
-                {
-                    "data": "internal",
-                    "render": function(data) {
-                        return data;
-                    }
-                },
                 {
                     "data": "created_at",
                     "type": "date",
@@ -122,17 +91,14 @@
                     }
                 },
                 {
-                    "data": "information",
-                    "bSortable": false,
+                    "data": "updated_at",
+                    "type": "date",
+                    "render": function (data) {
+                        var date = new Date(data);
+                        var month = date.getMonth() + 1;
+                        return (date.getDate() + "/" + ((month >= 10) ? month : "0" + month) + "/" + date.getFullYear());
+                    }
                 },
-                {
-                    "data": "edit",
-                    "bSortable": false,
-                },
-                {
-                    "data": "delete",
-                    "bSortable": false,
-                }
             ]
         });
     });

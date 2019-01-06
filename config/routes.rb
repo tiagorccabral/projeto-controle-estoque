@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     post 'compare_charts', to: 'time_charts#chart_create'
     get '/items_list', to: 'items#items_list'
     put '/sell_item', to: 'items#sell'
+    get '/sold_list', to: 'sold_items#index'
   end
 
 end
