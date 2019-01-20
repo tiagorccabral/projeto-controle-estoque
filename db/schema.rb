@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_06_032408) do
+ActiveRecord::Schema.define(version: 2019_01_20_021547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,14 @@ ActiveRecord::Schema.define(version: 2019_01_06_032408) do
     t.text "code"
   end
 
+  create_table "report_lists", force: :cascade do |t|
+    t.string "name"
+    t.date "from_date"
+    t.date "to_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sold_items", force: :cascade do |t|
     t.string "name"
     t.integer "code"
@@ -76,6 +84,15 @@ ActiveRecord::Schema.define(version: 2019_01_06_032408) do
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sold_report_lists", force: :cascade do |t|
+    t.bigint "report_lists_id"
+    t.bigint "sold_items_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["report_lists_id"], name: "index_sold_report_lists_on_report_lists_id"
+    t.index ["sold_items_id"], name: "index_sold_report_lists_on_sold_items_id"
   end
 
   create_table "time_charts", force: :cascade do |t|

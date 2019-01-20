@@ -1,0 +1,87 @@
+<h1>Relatórios de vendas do bazar</h1>
+
+<table class="responsive nowrap table table-hover" id="dttb-backoffice_report_lists" data-sort="true" data-source="<%= backoffice_report_lists_path(format: :json)%>">
+  <thead>
+    <tr>
+      <th data-data="name">Nome</th>
+      <th data-data="from_date">Do dia</th>
+      <th data-data="to_date">Até o dia</th>
+      <th data-data="info">Informações</th>
+      <th data-data="edit">Editar</th>
+      <th data-data="delete">Remover</th>
+    </tr>
+  </thead>
+
+</table>
+
+<br>
+
+<%= link_to 'Novo relatório de vendas', new_backoffice_report_list_path, class: 'btn btn-success' %>
+
+
+<script charset="utf-8">
+    jQuery(document).ready(function() {
+        $('#dttb-backoffice_report_lists').dataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": $('#dttb-backoffice_report_lists').data('source'),
+            "pagingType": "full_numbers",
+            "oLanguage": {
+                "sEmptyTable": "Nenhum registro encontrado",
+                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "_MENU_ resultados por página",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sZeroRecords": "Nenhum registro encontrado",
+                "sSearch": "Pesquisar",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Último"
+                },
+                "oAria": {
+                    "sSortAscending": ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                }
+            },
+            "columns": [
+                {"data": "name"},
+                {
+                    "data": "from_date",
+                    "type": "date",
+                    "render": function (data) {
+                        var date = new Date(data);
+                        var month = date.getMonth() + 1;
+                        return (date.getDate() + "/" + ((month >= 10) ? month : "0" + month) + "/" + date.getFullYear());
+                    }
+                },
+                {
+                    "data": "to_date",
+                    "type": "date",
+                    "render": function (data) {
+                        var date = new Date(data);
+                        var month = date.getMonth() + 1;
+                        return (date.getDate() + "/" + ((month >= 10) ? month : "0" + month) + "/" + date.getFullYear());
+                    }
+                },
+                {
+                    "data": "information",
+                    "bSortable": false,
+                },
+                {
+                    "data": "edit",
+                    "bSortable": false,
+                },
+                {
+                    "data": "delete",
+                    "bSortable": false,
+                }
+            ]
+        });
+    });
+</script>

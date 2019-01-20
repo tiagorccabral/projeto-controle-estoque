@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @backoffice_report_list.name %>
+</p>
+
+<p>
+  <strong>From date:</strong>
+  <%= @backoffice_report_list.from_date %>
+</p>
+
+<p>
+  <strong>To date:</strong>
+  <%= @backoffice_report_list.to_date %>
+</p>
+
+<%= link_to 'Edit', edit_backoffice_report_list_path(@backoffice_report_list) %> |
+<%= link_to 'Back', backoffice_report_lists_path %>

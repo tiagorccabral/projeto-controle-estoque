@@ -1,0 +1,71 @@
+<%= form_with(model: backoffice_report_list, local: true) do |form| %>
+  <% if backoffice_report_list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(backoffice_report_list.errors.count, "erro") %> proibiram este relatório de ser criado:</h2>
+
+      <ul>
+        <% backoffice_report_list.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-6">
+        <%= form.label :name, "Nome" %>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="form-check">
+        <%= form.check_box :today_only, id: "checkbox-today", class: "form-check-input" %>
+        <label>Somente hoje</label>
+      </div>
+    </div>
+  </div>
+
+  <fieldset id="dates-fieldset">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-6">
+          <%= form.label :from_date, "Do dia" %>
+          <%= form.date_field :from_date, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-6">
+          <%= form.label :to_date, "Até o dia" %>
+          <%= form.date_field :to_date, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-6">
+        <%= form.submit "Salvar", class: 'btn btn-success' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        $("#checkbox-today").click(function() {
+            var isDisabled = $("#checkbox-today").prop('checked');
+            if(!isDisabled) {
+                $("#dates-fieldset").removeAttr("disabled");
+            } else {
+                $("#dates-fieldset").prop('disabled', true)
+            }
+        });
+    });
+</script>
