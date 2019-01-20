@@ -29,13 +29,7 @@
             Valor
           </th>
           <th>
-            Quantidade vendida
-          </th>
-          <th>
-            Data 1ª venda
-          </th>
-          <th>
-            Data da última venda
+            Data da venda
           </th>
         </tr>
         </thead>
@@ -80,7 +74,6 @@
                 {"data": "code"},
                 {"data": "name"},
                 {"data": "value"},
-                {"data": "amount"},
                 {
                     "data": "created_at",
                     "type": "date",
@@ -89,16 +82,7 @@
                         var month = date.getMonth() + 1;
                         return (date.getDate() + "/" + ((month >= 10) ? month : "0" + month) + "/" + date.getFullYear());
                     }
-                },
-                {
-                    "data": "updated_at",
-                    "type": "date",
-                    "render": function (data) {
-                        var date = new Date(data);
-                        var month = date.getMonth() + 1;
-                        return (date.getDate() + "/" + ((month >= 10) ? month : "0" + month) + "/" + date.getFullYear());
-                    }
-                },
+                }
             ]
         });
     });
