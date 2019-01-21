@@ -1,0 +1,2 @@
+module Backoffice::ReportListsHelper
+end

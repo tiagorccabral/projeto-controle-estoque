@@ -1,51 +1,37 @@
-<div class="row purchace-popup">
-  <div class="col-12">
-    <span class="d-block d-md-flex align-items-center">
-      <%= link_to "/backoffice/items_list", class: "btn btn-primary btn-lg btn-fw" do %>
-              <i class="mdi mdi-view-list" style="color: white"></i>
-              <span class="menu-title">Listagem de doações</span>
-            <% end %>
-      <%= link_to "/backoffice/items", class: "btn btn-info btn-lg btn-fw" do %>
-              <i class="mdi mdi-view-list" style="color: white"></i>
-              <span class="menu-title">Painel inicial de doações</span>
-            <% end %>
-    </span>
-  </div>
-</div>
+
 <div class="card">
   <div class="card-body">
-    <h4 class="card-title">Listagem completa de doações</h4>
-    <div class="table-responsive" style="overflow-y: auto;">
-      <table class="table table-striped Flipped" id="sold_items-datatable" data-source="<%= backoffice_sold_list_path(format: :json) %>">
-        <thead>
-        <tr>
-          <th>
-            Código do produto
-          </th>
-          <th>
-            Nome do produto
-          </th>
-          <th>
-            Valor
-          </th>
-          <th>
-            Data da venda
-          </th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
+    <div class="card-title">
+      <h4>Relatórios de vendas do bazar</h4>
+      <div class="table-responsive" style="overflow-y: auto;">
+        <table class="table table-striped" id="dttb-backoffice_report_lists" data-sort="true" data-source="<%= backoffice_report_lists_path(format: :json)%>">
+          <thead>
+          <tr>
+            <th data-data="name">Nome</th>
+            <th data-data="from_date">Do dia</th>
+            <th data-data="to_date">Até o dia</th>
+            <th data-data="info">Informações</th>
+            <th data-data="delete">Remover</th>
+          </tr>
+          </thead>
+
+        </table>
+      </div>
     </div>
   </div>
 </div>
 
+<br>
+
+<%= link_to 'Novo relatório de vendas', new_backoffice_report_list_path, class: 'btn btn-success' %>
+
+
 <script charset="utf-8">
     jQuery(document).ready(function() {
-        $('#sold_items-datatable').dataTable({
+        $('#dttb-backoffice_report_lists').dataTable({
             "processing": true,
             "serverSide": true,
-            "ajax": $('#sold_items-datatable').data('source'),
+            "ajax": $('#dttb-backoffice_report_lists').data('source'),
             "pagingType": "full_numbers",
             "oLanguage": {
                 "sEmptyTable": "Nenhum registro encontrado",
@@ -71,17 +57,32 @@
                 }
             },
             "columns": [
-                {"data": "code"},
                 {"data": "name"},
-                {"data": "value"},
                 {
-                    "data": "created_at",
+                    "data": "from_date",
                     "type": "date",
                     "render": function (data) {
                         var date = new Date(data);
                         var month = date.getMonth() + 1;
                         return (date.getDate() + "/" + ((month >= 10) ? month : "0" + month) + "/" + date.getFullYear());
                     }
+                },
+                {
+                    "data": "to_date",
+                    "type": "date",
+                    "render": function (data) {
+                        var date = new Date(data);
+                        var month = date.getMonth() + 1;
+                        return (date.getDate() + "/" + ((month >= 10) ? month : "0" + month) + "/" + date.getFullYear());
+                    }
+                },
+                {
+                    "data": "information",
+                    "bSortable": false,
+                },
+                {
+                    "data": "delete",
+                    "bSortable": false,
                 }
             ]
         });
