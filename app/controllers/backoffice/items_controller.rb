@@ -92,20 +92,12 @@ class Backoffice::ItemsController < ApplicationController
 
   private
   def addToSold(item)
-    if SoldItem.exists?(code: item.id)
-      soldItem = SoldItem.find_by(code: item.id)
-      puts(soldItem.value)
-      soldItem.value += item.value
-      soldItem.amount += 1
-      soldItem.save
-    else
-      soldItem = SoldItem.new
-      soldItem.name = item.name
-      soldItem.code = item.id
-      soldItem.value = item.value
-      soldItem.amount = 1
-      soldItem.save
-    end
+    soldItem = SoldItem.new
+    soldItem.name = item.name
+    soldItem.code = item.id
+    soldItem.value = item.value
+    soldItem.amount = 1
+    soldItem.save
   end
   def item_params
     params.require(:item).permit(:id, :name, :observation, :amount, :value,

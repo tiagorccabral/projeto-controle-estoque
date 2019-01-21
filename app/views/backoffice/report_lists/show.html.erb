@@ -1,0 +1,71 @@
+<div class="row purchace-popup">
+  <div class="col-12">
+    <span class="d-block d-md-flex align-items-center">
+      <%= link_to "/backoffice/report_lists/new", class: "btn btn-success btn-lg btn-fw" do %>
+        <i class="mdi mdi-plus-circle" style="color: white"></i>
+        <span class="menu-title">Novo relatório de vendas</span>
+      <% end %>
+      <%= link_to "/backoffice/report_lists", class: "btn btn-primary btn-lg btn-fw" do %>
+              <i class="mdi mdi-view-list" style="color: white"></i>
+              <span class="menu-title">Listagem de relatórios</span>
+            <% end %>
+    </span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <div class="card-title">
+      <h2><%= @backoffice_report_list.name %></h2>
+      <h5>Do dia: <%= @backoffice_report_list.from_date.strftime("%d/%m/%Y") %></h5>
+      <h5>Até dia: <%= @backoffice_report_list.to_date.strftime("%d/%m/%Y") %></h5>
+    </div>
+    <div class="row">
+      <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 grid-margin stretch-card">
+        <div class="card card-statistics">
+          <div class="card-body">
+            <h3>Valor total</h3>
+            <p>
+              <%= number_to_currency(@total_value, :unit => "R$ ", :separator => ",", :delimiter => ".") %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 grid-margin stretch-card">
+        <div class="card card-statistics">
+          <div class="card-body">
+            <h3>Quantidade total</h3>
+            <p>
+              <%= @total_amount %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table-responive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nome</th>
+          <th>Valor</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @sold_items.each do |sold_item| %>
+        <tr>
+          <td><%= sold_item.code %></td>
+          <td><%= sold_item.name %></td>
+          <td>
+            <%= number_to_currency(sold_item.value, :unit => "R$ ", :separator => ",", :delimiter => ".") %>
+          </td>
+        </tr>
+        <% end %>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%= link_to 'Voltar', backoffice_report_lists_path %>
