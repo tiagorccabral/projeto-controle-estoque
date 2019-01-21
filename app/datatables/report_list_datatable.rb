@@ -27,7 +27,6 @@ class ReportListDatatable < AjaxDatatablesRails::ActiveRecord
           from_date: record.from_date,
           to_date: record.to_date,
           information: link_to("Informações", backoffice_report_list_path(record), class: "text-info"),
-          edit: link_to("Editar", edit_backoffice_report_list_path(record), class: "text-primary"),
           delete: link_to("Deletar", backoffice_report_list_path(record), method: "delete", data: {confirm: "Tem certeza?"}, class: "text-danger"),
           DT_RowId:   record.id
       }

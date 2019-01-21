@@ -1,18 +1,25 @@
-<h1>Relatórios de vendas do bazar</h1>
 
-<table class="responsive nowrap table table-hover" id="dttb-backoffice_report_lists" data-sort="true" data-source="<%= backoffice_report_lists_path(format: :json)%>">
-  <thead>
-    <tr>
-      <th data-data="name">Nome</th>
-      <th data-data="from_date">Do dia</th>
-      <th data-data="to_date">Até o dia</th>
-      <th data-data="info">Informações</th>
-      <th data-data="edit">Editar</th>
-      <th data-data="delete">Remover</th>
-    </tr>
-  </thead>
+<div class="card">
+  <div class="card-body">
+    <div class="card-title">
+      <h4>Relatórios de vendas do bazar</h4>
+      <div class="table-responsive" style="overflow-y: auto;">
+        <table class="table table-striped" id="dttb-backoffice_report_lists" data-sort="true" data-source="<%= backoffice_report_lists_path(format: :json)%>">
+          <thead>
+          <tr>
+            <th data-data="name">Nome</th>
+            <th data-data="from_date">Do dia</th>
+            <th data-data="to_date">Até o dia</th>
+            <th data-data="info">Informações</th>
+            <th data-data="delete">Remover</th>
+          </tr>
+          </thead>
 
-</table>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
 <br>
 
@@ -71,10 +78,6 @@
                 },
                 {
                     "data": "information",
-                    "bSortable": false,
-                },
-                {
-                    "data": "edit",
                     "bSortable": false,
                 },
                 {

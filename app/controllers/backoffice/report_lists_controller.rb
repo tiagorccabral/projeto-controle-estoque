@@ -2,7 +2,7 @@
 
 class Backoffice::ReportListsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_backoffice_report_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_backoffice_report_list, only: [:edit, :update, :destroy]
 
   # GET /backoffice/report_lists
   # GET /backoffice/report_lists.json
@@ -16,6 +16,14 @@ class Backoffice::ReportListsController < ApplicationController
   # GET /backoffice/report_lists/1
   # GET /backoffice/report_lists/1.json
   def show
+    @backoffice_report_list = Backoffice::ReportList.find(params[:id])
+    @sold_items = gather_data(@backoffice_report_list)
+    @total_value = 0
+    @total_amount = 0
+    @sold_items.each do |sold_item|
+      @total_value += sold_item.value
+      @total_amount += 1
+    end
   end
 
   # GET /backoffice/report_lists/new
@@ -31,16 +39,15 @@ class Backoffice::ReportListsController < ApplicationController
   # POST /backoffice/report_lists.json
   def create
     @backoffice_report_list = Backoffice::ReportList.new(backoffice_report_list_params)
+    # formats date based on form income
+    if params['backoffice_report_list']['today_only'] == "1"
+      # @backoffice_report_list.from_date = Time.parse(Date.current.to_s).midnight
+      # @backoffice_report_list.to_date = Time.parse(Date.current.to_s).end_of_day
+      @backoffice_report_list.from_date = Date.current.to_s
+      @backoffice_report_list.to_date = Date.current.to_s
+    end
     respond_to do |format|
       if @backoffice_report_list.save
-        # recovers and saves data of sold items
-        if params['today_only'] == "1"
-          retrieve_sold_items(nil, nil, @backoffice_report_list)
-        else
-          retrieve_sold_items(backoffice_report_list_params['from_date'],
-                              backoffice_report_list_params['to_date'],
-                              @backoffice_report_list)
-        end
         format.html { redirect_to @backoffice_report_list, notice: 'Relatório de vendas criado com sucesso.' }
         format.json { render :show, status: :created, location: @backoffice_report_list }
       else
@@ -76,43 +83,13 @@ class Backoffice::ReportListsController < ApplicationController
 
   private
 
-  # @param [String] from
-  # @param [String] to
-  # @param [String] report_list_id
-  def retrieve_sold_items(from, to, report_list_id)
-    # gathers data only of the current day
-    if from == nil and to == nil
-      from_time = Time.parse(Date.current.to_s).midnight
-      to_time = Time.parse(Date.current.to_s).end_of_day
-      soldItemData = SoldItem.where('created_at >= ? AND created_at <= ?',
-                                    from_time, to_time)
-      if soldItemData != nil
-        soldItemData.each do |item|
-          puts(report_list_id)
-          puts(item.id)
-          report_list_id.sold_item << item
-          # sold_report_list.report_lists_id = report_list_id
-          # sold_report_list.sold_items_id = item.id
-          report_list_id.save!
-          # itemOb = SoldItem.find_by(id: item.id)
-          # itemOb.report_list_ids << report_list_id
-        end
-      end
-      # gathers data from interval of dates (from, to)
-    else
-      from_time = Time.parse(from.to_s).midnight
-      to_time = Time.parse(to.to_s).end_of_day
-      soldItemData = SoldItem.where('created_at >= ? AND created_at <= ?',
-                                    from_time, to_time)
-      if soldItemData != nil
-        soldItemData.each do |item|
-          sold_report_list = SoldReportList.new
-          sold_report_list.report_lists_id = ::ReportList.last.id
-          sold_report_list.sold_items_id = item.id
-          sold_report_list.save!
-        end
-      end
-    end
+  # @param [Object] from
+  def gather_data(report_list)
+    from_date = Time.parse(report_list.from_date.to_s).midnight
+    to_date = Time.parse(report_list.to_date.to_s).end_of_day
+    sold_items = SoldItem.where("created_at >= ? AND created_at <= ?", from_date,
+                                to_date)
+    sold_items
   end
 
   # Use callbacks to share common setup or constraints between actions.
