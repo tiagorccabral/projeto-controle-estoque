@@ -33,6 +33,28 @@ class Backoffice::ItemsController < ApplicationController
     end
   end
 
+  def lost_item
+    @item = Item.find(params[:item_id])
+    lost_amount = params[:item][:amount].to_i
+    if params[:item] and params[:item][:amount]
+      iterator = 0
+      until iterator >= lost_amount
+        addToLost(@item, params[:lost_status])
+        iterator = iterator + 1
+      end
+    end
+    @item.amount = @item.amount - params[:item][:amount].to_i
+    if @item.amount == 0
+      @item.destroy
+    else
+      @item.save
+    end
+    respond_to do |format|
+      format.html { redirect_to backoffice_items_list_path, notice: 'Quantidade do item diminuida.'}
+      format.js { }
+    end
+  end
+
   # GET /items_list
   def items_list
     @items = Item.all.order('updated_at DESC')
@@ -99,6 +121,16 @@ class Backoffice::ItemsController < ApplicationController
     soldItem.amount = 1
     soldItem.save
   end
+
+  def addToLost(item, status)
+    lostItem = LostItem.new
+    lostItem.name = item.name
+    lostItem.code = item.id
+    lostItem.value = item.value
+    lostItem.status = status
+    lostItem.save
+  end
+
   def item_params
     params.require(:item).permit(:id, :name, :observation, :amount, :value,
                                  :donor, :receiver, :internal, :used, :lost,

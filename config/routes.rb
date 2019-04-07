@@ -16,11 +16,13 @@ Rails.application.routes.draw do
     resources :inventory_items
     resources :categories
     resources :report_lists
+    resources :lost_items
     get '/inventory_list', to: 'inventory_items#inventory_list'
     get 'compare_charts', to: 'time_charts#chart_new'
     post 'compare_charts', to: 'time_charts#chart_create'
     get '/items_list', to: 'items#items_list'
     put '/sell_item', to: 'items#sell'
+    patch '/update_lost_item', to: 'items#lost_item'
     get '/sold_list', to: 'sold_items#index'
   end
 

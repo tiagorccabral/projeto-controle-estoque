@@ -1,0 +1,52 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>
+        Nome do produto
+      </th>
+      <th>
+        Valor
+      </th>
+      <th>
+        Quantidade
+      </th>
+      <th>
+        Nome do doador
+      </th>
+      <th>
+        Nome do recebedor
+      </th>
+      <th>
+        Foi funcionário interno?
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td class="py-1">
+        <%= @item.name %>
+      </td>
+      <td>
+        R$:&nbsp;<%= @item.value %>
+      </td>
+      <td>
+        <%= @item.amount %>
+      </td>
+      <td>
+        <%= @item.donor %>
+      </td>
+      <td>
+        <%= @item.receiver %>
+      </td>
+      <td>
+        <% if @item.internal %>
+          Sim
+        <% else %>
+          Não
+        <% end %>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,81 @@
+<div class="row purchace-popup">
+  <div class="col-12">
+    <span class="d-block d-md-flex align-items-center">
+      <%= link_to "/backoffice/items/new", class: "btn btn-success btn-lg btn-fw" do %>
+        <i class="mdi mdi-plus-circle" style="color: white"></i>
+        <span class="menu-title">Nova doação</span>
+      <% end %>
+      <%= link_to "/backoffice/lost_items", class: "btn btn-primary btn-lg btn-fw" do %>
+              <i class="mdi mdi-view-list" style="color: white"></i>
+              <span class="menu-title">Listagem de itens perdidos</span>
+            <% end %>
+      <i class="mdi mdi-close ml-auto popup-dismiss d-none d-md-block"></i>
+    </span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h2 ><%= @lost_item.name %></h2>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>
+            Nome do produto
+          </th>
+          <th>
+            Valor
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            <%= @lost_item.name %>
+          </td>
+          <td>
+            <%= number_to_currency(@lost_item.value, :unit => "R$ ", :separator => ",", :delimiter => ".") %>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+      <div class="card card-statistics">
+        <div class="card-body">
+          <h3>Status do item</h3>
+          <% if @lost_item.status == "stolen" %>
+            <p>
+              Item furtado
+            </p>
+          <% elsif @lost_item.status == "deterioration" %>
+            <p>
+              Item deteriorado
+            </p>
+          <% elsif @lost_item.status == "donation" %>
+            <p>
+              Item doado
+            </p>
+          <% elsif @lost_item.status == "other" %>
+            <p>
+              Outro
+            </p>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="form-group">
+        <%= link_to 'Voltar', backoffice_lost_items_path, class: 'btn btn-primary rounded' %>
+      </div>
+    </div>
+  </div>
+
+</div>

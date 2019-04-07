@@ -1,0 +1,105 @@
+<h1>Listagem de itens perdidos</h1>
+<div class="row purchace-popup">
+  <div class="col-12">
+    <span class="d-block d-md-flex align-items-center">
+      <%= link_to "/backoffice/items/new", class: "btn btn-success btn-lg btn-fw" do %>
+        <i class="mdi mdi-plus-circle" style="color: white"></i>
+        <span class="menu-title">Nova doação</span>
+      <% end %>
+      <%= link_to "/backoffice/items", class: "btn btn-primary btn-lg btn-fw" do %>
+              <i class="mdi mdi-view-list" style="color: white"></i>
+              <span class="menu-title">Painel inicial</span>
+            <% end %>
+      <%= link_to "/backoffice/sold_list", class: "btn btn-info btn-lg btn-fw" do %>
+              <i class="mdi mdi-view-list" style="color: white"></i>
+              <span class="menu-title">Listagem de vendas</span>
+            <% end %>
+    </span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Listagem completa de itens perdidos</h4>
+    <div class="table-responsive" style="overflow-y: auto;">
+      <table class="table table-striped Flipped" id="lost-items-datatable" data-source="<%= backoffice_lost_items_path(format: :json) %>">
+        <thead>
+        <tr>
+          <th>
+            Código do produto
+          </th>
+          <th>
+            Nome do produto
+          </th>
+          <th>
+            Valor
+          </th>
+          <th>
+            Status
+          </th>
+          <th>
+            Perdido em
+          </th>
+          <th>
+            Informações
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script charset="utf-8">
+    jQuery(document).ready(function() {
+        $('#lost-items-datatable').dataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": $('#lost-items-datatable').data('source'),
+            "pagingType": "full_numbers",
+            "oLanguage": {
+                "sEmptyTable": "Nenhum registro encontrado",
+                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "_MENU_ resultados por página",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sZeroRecords": "Nenhum registro encontrado",
+                "sSearch": "Pesquisar",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Último"
+                },
+                "oAria": {
+                    "sSortAscending": ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                }
+            },
+            "columns": [
+                {"data": "code"},
+                {"data": "name"},
+                {"data": "value"},
+                {"data": "status"},
+                {
+                    "data": "created_at",
+                    "type": "date",
+                    "render": function (data) {
+                        var date = new Date(data);
+                        var month = date.getMonth() + 1;
+                        return (date.getDate() + "/" + ((month >= 10) ? month : "0" + month) + "/" + date.getFullYear());
+                    }
+                },
+                {
+                    "data": "information",
+                    "bSortable": false,
+                }
+            ]
+        });
+    });
+</script>
