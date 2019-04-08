@@ -1,0 +1,4 @@
+$('#item_grid').html("<%= escape_javascript (render partial: 'backoffice/items/show_table', locals: { item: @item }) %>");
+$("#flash").html("<%= escape_javascript raw(custom_bootstrap_flash) %>");
+toastr.success("Adicionado aos itens perdidos com sucesso");
+$(document).ready(function () { $('html, body').animate({scrollTop:0}, 400); });
