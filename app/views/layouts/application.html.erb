@@ -26,7 +26,8 @@
 </head>
 
 <body>
-<%= custom_flash %>
+<%#= custom_flash %>
+<%= custom_bootstrap_flash %>
 <% if user_signed_in? == true %>
   <div class="container-scroller">
     <%= render 'backoffice/shared/navbar' %>

@@ -17,12 +17,20 @@ class Backoffice::ReportListsController < ApplicationController
   # GET /backoffice/report_lists/1.json
   def show
     @backoffice_report_list = Backoffice::ReportList.find(params[:id])
+    @lost_items = nil
     @sold_items = gather_data(@backoffice_report_list)
+    @lost_items = gather_lost_item_data(@backoffice_report_list)
+    @total_lost_value = 0.0
+    @total_lost_amount = 0
     @total_value = 0
     @total_amount = 0
     @sold_items.each do |sold_item|
       @total_value += sold_item.value
       @total_amount += 1
+    end
+    @lost_items.each do |lost_item|
+      @total_lost_value += lost_item.value
+      @total_lost_amount += 1
     end
   end
 
@@ -90,6 +98,14 @@ class Backoffice::ReportListsController < ApplicationController
     sold_items = SoldItem.where("created_at >= ? AND created_at <= ?", from_date,
                                 to_date)
     sold_items
+  end
+
+  def gather_lost_item_data(report_list)
+    from_date = Time.parse(report_list.from_date.to_s).midnight
+    to_date = Time.parse(report_list.to_date.to_s).end_of_day
+    lost_items = LostItem.where("created_at >= ? AND created_at <= ?", from_date,
+                                to_date)
+    lost_items
   end
 
   # Use callbacks to share common setup or constraints between actions.

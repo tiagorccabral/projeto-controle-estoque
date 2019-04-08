@@ -9,64 +9,14 @@
               <i class="mdi mdi-view-list" style="color: white"></i>
               <span class="menu-title">Listagem de doações</span>
             <% end %>
-      <i class="mdi mdi-close ml-auto popup-dismiss d-none d-md-block"></i>
     </span>
   </div>
 </div>
 <div class="card">
   <div class="card-body">
-    <h2 ><%= @item.name %></h2>
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th>
-            Nome do produto
-          </th>
-          <th>
-            Valor
-          </th>
-          <th>
-            Quantidade
-          </th>
-          <th>
-            Nome do doador
-          </th>
-          <th>
-            Nome do recebedor
-          </th>
-          <th>
-            Foi funcionário interno?
-          </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td class="py-1">
-            <%= @item.name %>
-          </td>
-          <td>
-            R$:&nbsp;<%= @item.value %>
-          </td>
-          <td>
-            <%= @item.amount %>
-          </td>
-          <td>
-            <%= @item.donor %>
-          </td>
-          <td>
-            <%= @item.receiver %>
-          </td>
-          <td>
-            <% if @item.internal %>
-              Sim
-            <% else %>
-              Não
-            <% end %>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+    <h2><%= @item.name %></h2>
+    <div id="item_grid" >
+      <%= render 'backoffice/items/show_table', locals: {item: @item} %>
     </div>
   </div>
 
@@ -116,4 +66,56 @@
     </div>
   </div>
 
+</div>
+
+<div class="row">
+  <div class="col-10">
+    <div class="card" style="margin-top: 1em">
+      <div class="card-body">
+        <h2>Produto perdido?</h2>
+        <%= form_for [:backoffice, @item], remote: :true,
+                     :url => {:controller => "backoffice/items", :action => "lost_item", method: :put} do |f| %>
+          <h4 class="card-description">
+            Dar baixa no produto
+          </h4>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Quantidade perdida</label>
+                <div class="col-sm-9">
+                  <%= f.number_field(:amount,
+                                     class: "form-control",
+                                     placeholder: "Valor do produto (individualmente)",
+                                     step: 1,
+                                     min: 1,
+                                     max: @item.amount,
+                                     required: true) %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Situação</label>
+                <div class="col-sm-9">
+                  <select class="form-control" name="lost_status">
+                    <option value="stolen">Roubado</option>
+                    <option value="deterioration">Deteriorado</option>
+                    <option value="donation">Doado</option>
+                    <option value="other">Outro</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%= hidden_field_tag 'item_id', @item.id %>
+          <div class="form-group">
+            <%= f.submit('Dar baixa', class: 'btn btn-warning rounded', data: {confirm: "Tem certeza?"},) %>
+            <%= link_to 'Voltar', backoffice_items_path, class: 'btn btn-primary rounded' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

@@ -3,6 +3,7 @@ class ItemDatatable < AjaxDatatablesRails::ActiveRecord
 
   def_delegator :@view, :link_to
   def_delegator :@view, :backoffice_sell_item_path
+  def_delegator :@view, :backoffice_update_lost_item_path
   def_delegator :@view, :edit_backoffice_item_path
   def_delegator :@view, :backoffice_item_path
   def_delegator :@view, :number_to_currency
@@ -36,6 +37,7 @@ class ItemDatatable < AjaxDatatablesRails::ActiveRecord
         receiver: record.receiver,
         internal: record.internal,
         created_at: record.created_at,
+        lost_item: link_to("Perdido -", backoffice_update_lost_item_path(id: record.id), method: "put", data: {confirm: "Tem certeza?"}, class: "btn btn-info"),
         sell_item: link_to("-", backoffice_sell_item_path(id: record.id), method: "put", data: {confirm: "Tem certeza?"}, class: "btn btn-info"),
         information: link_to("Informações", backoffice_item_path(record), class: "text-info"),
         edit: link_to("Editar", edit_backoffice_item_path(record), class: "text-primary"),
